@@ -1,0 +1,22 @@
+export default {
+  name: 'supportContent',
+  title: 'Support Us Content',
+  type: 'document',
+  fields: [
+    {
+      name: 'body',
+      title: 'Support Text',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description: '1–2 paragraphs explaining why support matters',
+    },
+    {
+      name: 'goFundMeUrl',
+      title: 'GoFundMe URL',
+      type: 'url',
+      description: 'Link for the main Support Us donate button',
+    },
+    { name: 'photo', title: 'Team Photo', type: 'image', options: { hotspot: true } },
+  ],
+  preview: { prepare: () => ({ title: 'Support Us Content' }) },
+}
