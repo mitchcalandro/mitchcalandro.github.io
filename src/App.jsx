@@ -1,13 +1,14 @@
+import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import HeroSection from './components/HeroSection'
-import NewsletterSection from './components/NewsletterSection'
-import AboutSection from './components/AboutSection'
-import RocketSection from './components/RocketSection'
-import TimelineSection from './components/TimelineSection'
-import MembersSection from './components/MembersSection'
-import SupportSection from './components/SupportSection'
-import ContactSection from './components/ContactSection'
+import Footer from './components/Footer'
 import FloatingDonateButton from './components/FloatingDonateButton'
+import HomePage from './pages/HomePage'
+import ProjectPage from './pages/ProjectPage'
+import NewsletterPage from './pages/NewsletterPage'
+import MembersPage from './pages/MembersPage'
+import SupportPage from './pages/SupportPage'
+import GalleryPage from './pages/GalleryPage'
+import ContactPage from './pages/ContactPage'
 import { useSanityFetch } from './hooks/useSanityFetch'
 import { queries } from './lib/sanity'
 import './App.css'
@@ -18,16 +19,18 @@ export default function App() {
   return (
     <>
       <Navbar />
-      <main className="app-main">
-        <HeroSection />
-        <NewsletterSection />
-        <AboutSection />
-        <RocketSection />
-        <TimelineSection />
-        <MembersSection />
-        <SupportSection />
-        <ContactSection />
-      </main>
+      <div className="app-main">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/project" element={<ProjectPage />} />
+          <Route path="/newsletter" element={<NewsletterPage />} />
+          <Route path="/members" element={<MembersPage />} />
+          <Route path="/support" element={<SupportPage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </div>
+      <Footer />
       <FloatingDonateButton url={settings?.goFundMeUrl} />
     </>
   )
