@@ -23,7 +23,7 @@
   transition: background var(--transition);
 }
 
-.accordion__header:hover { background: #1a2540; }
+.accordion__header:hover { background: rgba(22, 31, 53, 0.8); }
 
 .accordion__icon {
   font-size: 1.25rem;
