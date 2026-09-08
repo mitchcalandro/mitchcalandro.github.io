@@ -1,0 +1,41 @@
+.accordion {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+
+.accordion--open { border-color: var(--accent); }
+
+.accordion__header {
+  width: 100%;
+  background: var(--card-bg);
+  border: none;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-light);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-align: left;
+  transition: background var(--transition);
+}
+
+.accordion__header:hover { background: #1a2540; }
+
+.accordion__icon {
+  font-size: 1.25rem;
+  color: var(--accent-hover);
+  line-height: 1;
+}
+
+.accordion__content {
+  padding: 1.25rem 1.5rem;
+  background: rgba(255,255,255,0.02);
+  border-top: 1px solid var(--border);
+  color: rgba(248,250,252,0.85);
+}
+
+.accordion__content p { margin-bottom: 0.75rem; }
