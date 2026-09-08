@@ -1,0 +1,50 @@
+.member-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  align-items: flex-start;
+  transition: border-color var(--transition);
+}
+
+.member-card:hover { border-color: var(--accent); }
+
+.member-card__photo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid var(--border);
+}
+
+.member-card__info { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.member-card__name {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+.member-card__role {
+  font-size: 0.85rem;
+  color: var(--accent-hover);
+  letter-spacing: 0.04em;
+}
+
+.member-card__bio {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+  line-height: 1.6;
+}
+
+.member-card__resume {
+  font-size: 0.85rem;
+  color: var(--accent-hover);
+  margin-top: 0.5rem;
+  display: inline-block;
+}
