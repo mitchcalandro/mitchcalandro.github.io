@@ -8,15 +8,17 @@ vi.mock('../lib/sanity', () => ({ queries: { support: 's' }, urlFor: () => ({ wi
 import SupportPage from '../pages/SupportPage'
 
 describe('SupportPage', () => {
-  it('renders a GoFundMe button when url is present', () => {
-    useSanityFetch.mockReturnValue({ data: { body: [], goFundMeUrl: 'https://gofundme.com/x', photo: null }, loading: false })
+  it('uses the campaign url from Sanity when it is set', () => {
+    useSanityFetch.mockReturnValue({ data: { body: [], goFundMeUrl: 'https://gofundme.com/f/aurelian' }, loading: false })
     render(<SupportPage />)
-    expect(screen.getByRole('link', { name: /donate/i })).toHaveAttribute('href', 'https://gofundme.com/x')
+    expect(screen.getByRole('link', { name: /donate/i }))
+      .toHaveAttribute('href', 'https://gofundme.com/f/aurelian')
   })
 
-  it('shows fallback when no url', () => {
+  it('falls back to the GoFundMe site so the button is never dead', () => {
     useSanityFetch.mockReturnValue({ data: { body: [], goFundMeUrl: null }, loading: false })
     render(<SupportPage />)
-    expect(screen.getByText(/donation link coming soon/i)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /donate/i }))
+      .toHaveAttribute('href', 'https://www.gofundme.com')
   })
 })

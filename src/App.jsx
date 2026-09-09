@@ -11,6 +11,7 @@ import GalleryPage from './pages/GalleryPage'
 import ContactPage from './pages/ContactPage'
 import { useSanityFetch } from './hooks/useSanityFetch'
 import { queries } from './lib/sanity'
+import { DEFAULT_DONATE_URL } from './lib/constants'
 import './App.css'
 
 export default function App() {
@@ -31,7 +32,7 @@ export default function App() {
         </Routes>
       </div>
       <Footer />
-      <FloatingDonateButton url={settings?.goFundMeUrl} />
+      <FloatingDonateButton url={settings?.goFundMeUrl || DEFAULT_DONATE_URL} />
     </>
   )
 }
