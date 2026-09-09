@@ -2,6 +2,7 @@ import { PortableText } from '@portabletext/react'
 import DonateBox from '../components/DonateBox'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries } from '../lib/sanity'
+import { DEFAULT_DONATE_URL } from '../lib/constants'
 import './SupportPage.css'
 
 export default function SupportPage() {
@@ -15,7 +16,7 @@ export default function SupportPage() {
           ? <PortableText value={data.body} />
           : <p className="section-subtitle">Your support helps us build. Details coming soon.</p>}
       </div>
-      <DonateBox url={data?.goFundMeUrl} tiers={data?.donationTiers || []} />
+      <DonateBox url={data?.goFundMeUrl || DEFAULT_DONATE_URL} />
     </div>
   )
 }
