@@ -1,0 +1,6 @@
+.phase-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color var(--transition); }
+.phase-card--open, .phase-card:hover { border-color: var(--accent); }
+.phase-card__header { width: 100%; background: none; border: none; text-align: left; padding: 1.5rem; cursor: pointer; display: flex; flex-direction: column; gap: 0.4rem; }
+.phase-card__name { font-family: var(--font-heading); font-size: 1.1rem; color: var(--text-light); }
+.phase-card__desc { font-size: 0.9rem; color: var(--text-muted); }
+.phase-card__body { padding: 0 1.5rem 1.5rem; color: var(--text-muted); line-height: 1.7; }
