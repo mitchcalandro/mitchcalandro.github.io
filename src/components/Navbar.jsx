@@ -1,62 +1,47 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 import './Navbar.css'
 
 const NAV_ITEMS = [
-  { id: 'home', label: 'Home' },
-  { id: 'newsletter', label: 'Newsletter' },
-  { id: 'about', label: 'About' },
-  { id: 'rocket', label: 'Rocket' },
-  { id: 'timeline', label: 'Timeline' },
-  { id: 'members', label: 'Members' },
-  { id: 'support', label: 'Support Us' },
-  { id: 'contact', label: 'Contact' },
+  { to: '/', label: 'Home' },
+  { to: '/project', label: 'Project Aurelian' },
+  { to: '/newsletter', label: 'Newsletter' },
+  { to: '/members', label: 'Members' },
+  { to: '/support', label: 'Support Us' },
+  { to: '/gallery', label: 'Gallery' },
+  { to: '/contact', label: 'Contact' },
 ]
 
 export default function Navbar() {
-  const [activeSection, setActiveSection] = useState('home')
   const [menuOpen, setMenuOpen] = useState(false)
-
-  useEffect(() => {
-    if (typeof IntersectionObserver === 'undefined') return
-    const observers = NAV_ITEMS.map(({ id }) => {
-      const el = document.getElementById(id)
-      if (!el) return null
-      const observer = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(id) },
-        { rootMargin: '-40% 0px -55% 0px' }
-      )
-      observer.observe(el)
-      return observer
-    })
-    return () => observers.forEach(o => o?.disconnect())
-  }, [])
-
-  const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-    setMenuOpen(false)
-  }
 
   return (
     <nav className="navbar">
-      <span className="navbar__logo">PROJECT AURELIAN</span>
+      <Link to="/" className="navbar__logo" onClick={() => setMenuOpen(false)}>
+        PROJECT AURELIAN
+      </Link>
 
       <button
         className="navbar__burger"
         aria-label="Toggle menu"
-        onClick={() => setMenuOpen(o => !o)}
+        onClick={() => setMenuOpen((o) => !o)}
       >
         ☰
       </button>
 
       <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
-        {NAV_ITEMS.map(({ id, label }) => (
-          <li key={id}>
-            <button
-              className={`navbar__link ${activeSection === id ? 'navbar__link--active' : ''}`}
-              onClick={() => scrollTo(id)}
+        {NAV_ITEMS.map(({ to, label }) => (
+          <li key={to}>
+            <NavLink
+              to={to}
+              end={to === '/'}
+              className={({ isActive }) =>
+                `navbar__link ${isActive ? 'navbar__link--active' : ''}`
+              }
+              onClick={() => setMenuOpen(false)}
             >
               {label}
-            </button>
+            </NavLink>
           </li>
         ))}
       </ul>
