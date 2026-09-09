@@ -25,6 +25,6 @@ export const queries = {
   faqs: `*[_type == "faq"] | order(order asc){ _id, question, answer }`,
   members: `*[_type == "member"] | order(order asc){ _id, name, role, photo, resumeUrl, bio, contributions, futureAspirations, githubUrl, linkedInUrl, email }`,
   support: `*[_type == "supportContent"][0]{ body, goFundMeUrl, photo }`,
-  contact: `*[_type == "contactInfo"] | order(order asc){ _id, name, role, email, linkedInUrl, githubUrl, photo, formspreeId }`,
+  contact: `*[_type == "contactInfo"] | order(order asc){ _id, name, role, email, linkedInUrl, githubUrl, photo }`,
   gallery: `*[_type == "galleryItem"] | order(order asc){ _id, image, caption, phase->{ _id, name } }`,
 }
