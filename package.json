@@ -11,6 +11,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@formspree/react": "^3.0.0",
     "@portabletext/react": "latest",
     "@sanity/client": "latest",
     "@sanity/image-url": "latest",

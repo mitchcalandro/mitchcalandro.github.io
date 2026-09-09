@@ -16,7 +16,7 @@ export function urlFor(source) {
 
 export const queries = {
   siteSettings: `*[_type == "siteSettings"][0]{
-    heroHeadline, heroTagline, goFundMeUrl, projectBody, lastUpdated, footerText,
+    heroHeadline, heroTagline, goFundMeUrl, projectBody, lastUpdated, footerText, formspreeId,
     currentPhase->{ _id, name, order }
   }`,
   newsletter: `*[_type == "newsletter"] | order(year desc, month desc){ _id, title, month, year, preview, body }`,
