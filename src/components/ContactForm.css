@@ -34,3 +34,4 @@
   border-radius: var(--radius);
 }
 .contact-form__error { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.75rem; }
+.contact-form__botcheck { position: absolute; left: -9999px; opacity: 0; }

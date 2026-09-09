@@ -4,7 +4,7 @@ import { useSanityFetch } from '../hooks/useSanityFetch'
 
 vi.mock('../hooks/useSanityFetch', () => ({ useSanityFetch: vi.fn() }))
 vi.mock('../lib/sanity', () => ({ queries: { siteSettings: 's', contact: 'c' }, urlFor: () => ({ width: () => ({ height: () => ({ url: () => '/p.svg' }) }) }) }))
-vi.mock('../components/ContactForm', () => ({ default: ({ formspreeId }) => formspreeId ? <form data-testid="contact-form" /> : null }))
+vi.mock('../components/ContactForm', () => ({ default: ({ accessKey }) => accessKey ? <form data-testid="contact-form" /> : null }))
 
 import ContactPage from '../pages/ContactPage'
 
@@ -19,7 +19,7 @@ const mockFetch = (settings, contactData = contacts) =>
 
 describe('ContactPage', () => {
   it('renders a card per contact with a personal email link', () => {
-    mockFetch({ formspreeId: 'abc' })
+    mockFetch({ web3formsKey: 'abc' })
     render(<ContactPage />)
     expect(screen.getByText('Scott Meeson')).toBeInTheDocument()
     expect(screen.getByText('Mitchell Calandro')).toBeInTheDocument()
@@ -27,15 +27,15 @@ describe('ContactPage', () => {
       .toHaveAttribute('href', 'mailto:scottdmeesonjr@gmail.com')
   })
 
-  it('renders one form when a formspreeId is configured', () => {
-    mockFetch({ formspreeId: 'abc' })
+  it('renders one form when a web3formsKey is configured', () => {
+    mockFetch({ web3formsKey: 'abc' })
     render(<ContactPage />)
     expect(screen.getAllByTestId('contact-form')).toHaveLength(1)
     expect(screen.queryByRole('link', { name: /contact us/i })).not.toBeInTheDocument()
   })
 
-  it('falls back to a mailto button when no formspreeId is set', () => {
-    mockFetch({ formspreeId: null })
+  it('falls back to a mailto button when no web3formsKey is set', () => {
+    mockFetch({ web3formsKey: null })
     render(<ContactPage />)
     expect(screen.queryByTestId('contact-form')).not.toBeInTheDocument()
     expect(screen.getByRole('link', { name: /contact us/i })).toHaveAttribute(
@@ -45,7 +45,7 @@ describe('ContactPage', () => {
   })
 
   it('shows an empty state when there are no contacts', () => {
-    mockFetch({ formspreeId: null }, [])
+    mockFetch({ web3formsKey: null }, [])
     render(<ContactPage />)
     expect(screen.getByText(/contact details coming soon/i)).toBeInTheDocument()
   })
