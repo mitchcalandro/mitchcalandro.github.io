@@ -48,3 +48,12 @@
   margin-top: 0.5rem;
   display: inline-block;
 }
+
+.member-card { flex-direction: column; align-items: stretch; }
+.member-card__photo { width: 100%; height: 220px; border-radius: var(--radius); }
+.member-card__block { margin-top: 0.75rem; }
+.member-card__label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-hover); margin-bottom: 0.25rem; }
+.member-card__rt { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+.member-card__links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
+.member-card__link { font-size: 0.85rem; color: var(--accent-hover); text-decoration: none; }
+.member-card__link:hover { color: var(--accent); }
