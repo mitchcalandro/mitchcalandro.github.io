@@ -1,0 +1,21 @@
+.newsletter-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color var(--transition), transform var(--transition);
+}
+.newsletter-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.newsletter-card__date { font-size: 0.8rem; color: var(--accent-hover); letter-spacing: 0.05em; text-transform: uppercase; }
+.newsletter-card__title { font-family: var(--font-heading); font-size: 1.1rem; color: var(--text-light); }
+.newsletter-card__preview { color: var(--text-muted); line-height: 1.6; flex-grow: 1; }
+.newsletter-card__read-more { align-self: flex-start; margin-top: 0.5rem; }
+.newsletter-card--featured {
+  grid-column: 1 / -1;
+  padding: 2.5rem;
+  border-color: var(--accent);
+}
+.newsletter-card--featured .newsletter-card__title { font-size: 1.75rem; }
