@@ -3,17 +3,13 @@ import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries } from '../lib/sanity'
 import './ContactPage.css'
 
-const SUBJECT = 'Project Aurelian Inquiry'
+const DEFAULT_FORMSPREE_ID = 'xrpgrlkb'
 
 export default function ContactPage() {
   const { data: settings } = useSanityFetch(queries.siteSettings)
   const { data: contacts } = useSanityFetch(queries.contact)
 
-  const accessKey = settings?.web3formsKey
-  const emails = (contacts || []).map((c) => c.email).filter(Boolean)
-  const mailtoAll = emails.length > 0
-    ? `mailto:${emails.join(',')}?subject=${encodeURIComponent(SUBJECT)}`
-    : null
+  const formspreeId = settings?.formspreeId || DEFAULT_FORMSPREE_ID
 
   return (
     <div className="contact-page page">
@@ -22,14 +18,7 @@ export default function ContactPage() {
         For inquiries or concerns, send us a message below. Response within 48 hours during regular business hours.
       </p>
 
-      {accessKey ? (
-        <ContactForm accessKey={accessKey} />
-      ) : mailtoAll && (
-        <div className="contact-page__cta">
-          <a className="btn-primary contact-page__mailto" href={mailtoAll}>Contact Us</a>
-          <p className="contact-page__cta-note">Opens your email app, addressed to the whole team.</p>
-        </div>
-      )}
+      <ContactForm formspreeId={formspreeId} />
 
       {(!contacts || contacts.length === 0) && (
         <p className="section-subtitle">Contact details coming soon.</p>
