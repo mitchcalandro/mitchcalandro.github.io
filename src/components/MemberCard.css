@@ -51,6 +51,26 @@
 
 .member-card { flex-direction: column; align-items: stretch; }
 .member-card__photo { width: 100%; height: 220px; border-radius: var(--radius); }
+
+/* Tier sizing — the size difference is what signals hierarchy */
+.member-card--leadership { padding: 2rem; }
+.member-card--leadership .member-card__photo { height: 320px; }
+.member-card--leadership .member-card__name { font-size: 1.5rem; }
+.member-card--leadership .member-card__role { font-size: 1rem; }
+
+.member-card--lead .member-card__photo { height: 200px; }
+.member-card--lead .member-card__name { font-size: 1.05rem; }
+
+.member-card--member { padding: 1rem; }
+.member-card--member .member-card__photo { height: 150px; }
+.member-card--member .member-card__name { font-size: 0.95rem; }
+.member-card--member .member-card__role { font-size: 0.78rem; }
+.member-card--member .member-card__bio { font-size: 0.82rem; }
+
+@media (max-width: 600px) {
+  .member-card--leadership .member-card__photo { height: 240px; }
+  .member-card--leadership .member-card__name { font-size: 1.25rem; }
+}
 .member-card__block { margin-top: 0.75rem; }
 .member-card__label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-hover); margin-bottom: 0.25rem; }
 .member-card__rt { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }

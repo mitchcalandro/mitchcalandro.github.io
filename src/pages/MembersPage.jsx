@@ -3,6 +3,8 @@ import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries } from '../lib/sanity'
 import './MembersPage.css'
 
+const TIERS = ['leadership', 'lead', 'member']
+
 export default function MembersPage() {
   const { data: members } = useSanityFetch(queries.members)
 
@@ -12,9 +14,16 @@ export default function MembersPage() {
       {(!members || members.length === 0) && (
         <p className="section-subtitle">Team roster coming soon.</p>
       )}
-      <div className="members-page__grid">
-        {members?.map((m) => <MemberCard key={m._id} member={m} />)}
-      </div>
+
+      {TIERS.map((tier) => {
+        const inTier = (members || []).filter((m) => (m.tier || 'member') === tier)
+        if (inTier.length === 0) return null
+        return (
+          <div key={tier} className={`members-page__tier members-page__tier--${tier}`}>
+            {inTier.map((m) => <MemberCard key={m._id} member={m} tier={tier} />)}
+          </div>
+        )
+      })}
     </div>
   )
 }
