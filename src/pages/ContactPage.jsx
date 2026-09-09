@@ -1,10 +1,16 @@
-import ContactForm from '../components/ContactForm'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries } from '../lib/sanity'
 import './ContactPage.css'
 
+const SUBJECT = 'Project Aurelian Inquiry'
+
 export default function ContactPage() {
   const { data: contacts } = useSanityFetch(queries.contact)
+
+  const emails = (contacts || []).map((c) => c.email).filter(Boolean)
+  const mailtoAll = emails.length > 0
+    ? `mailto:${emails.join(',')}?subject=${encodeURIComponent(SUBJECT)}`
+    : null
 
   return (
     <div className="contact-page page">
@@ -12,6 +18,13 @@ export default function ContactPage() {
       <p className="section-subtitle contact-page__intro">
         For inquiries or concerns, the fastest path is email. Response within 48 hours during regular business hours.
       </p>
+
+      {mailtoAll && (
+        <div className="contact-page__cta">
+          <a className="btn-primary contact-page__mailto" href={mailtoAll}>Contact Us</a>
+          <p className="contact-page__cta-note">Opens your email app, addressed to the whole team.</p>
+        </div>
+      )}
 
       {(!contacts || contacts.length === 0) && (
         <p className="section-subtitle">Contact details coming soon.</p>
@@ -28,7 +41,6 @@ export default function ContactPage() {
             {c.linkedInUrl && (
               <a className="contact-card__link" href={c.linkedInUrl} target="_blank" rel="noopener noreferrer">LinkedIn</a>
             )}
-            <ContactForm formspreeId={c.formspreeId} />
           </article>
         ))}
       </div>
