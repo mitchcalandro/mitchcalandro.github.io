@@ -1,7 +1,8 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import FloatingDonateButton from './components/FloatingDonateButton'
+import SupportPopup from './components/SupportPopup'
 import HomePage from './pages/HomePage'
 import ProjectPage from './pages/ProjectPage'
 import NewsletterPage from './pages/NewsletterPage'
@@ -16,6 +17,8 @@ import './App.css'
 
 export default function App() {
   const { data: settings } = useSanityFetch(queries.siteSettings)
+  const { pathname } = useLocation()
+  const donateUrl = settings?.goFundMeUrl || DEFAULT_DONATE_URL
 
   return (
     <>
@@ -32,7 +35,8 @@ export default function App() {
         </Routes>
       </div>
       <Footer />
-      <FloatingDonateButton url={settings?.goFundMeUrl || DEFAULT_DONATE_URL} />
+      <FloatingDonateButton url={donateUrl} />
+      <SupportPopup url={donateUrl} suppressed={pathname === '/support'} />
     </>
   )
 }
