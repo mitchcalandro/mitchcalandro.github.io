@@ -2,9 +2,9 @@ import { PortableText } from '@portabletext/react'
 import { urlFor } from '../lib/sanity'
 import './MemberCard.css'
 
-export default function MemberCard({ member }) {
+export default function MemberCard({ member, tier = 'member' }) {
   return (
-    <article className="member-card">
+    <article className={`member-card member-card--${tier}`}>
       <img
         src={member.photo ? urlFor(member.photo).width(300).height(300).url() : '/placeholder-photo.svg'}
         alt={member.name}
