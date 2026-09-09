@@ -22,6 +22,10 @@ export default {
       type: 'url',
       description: 'Link for the Donate button — update when GoFundMe is live',
     },
+    { name: 'projectBody', title: 'Project Description (in-depth)', type: 'array', of: [{ type: 'block' }, { type: 'image' }], description: 'Detailed project writeup for the Project Aurelian page' },
+    { name: 'currentPhase', title: 'Current Phase', type: 'reference', to: [{ type: 'phase' }], description: 'The phase the project is currently in' },
+    { name: 'lastUpdated', title: 'Last Updated', type: 'date', description: 'Shown in the footer' },
+    { name: 'footerText', title: 'Footer Text', type: 'string', description: 'e.g. "Project Aurelian" — shown after the © in the footer' },
   ],
   preview: { prepare: () => ({ title: 'Site Settings' }) },
 }
