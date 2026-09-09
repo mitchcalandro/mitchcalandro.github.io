@@ -26,7 +26,7 @@ export default {
     { name: 'currentPhase', title: 'Current Phase', type: 'reference', to: [{ type: 'phase' }], description: 'The phase the project is currently in' },
     { name: 'lastUpdated', title: 'Last Updated', type: 'date', description: 'Shown in the footer' },
     { name: 'footerText', title: 'Footer Text', type: 'string', description: 'e.g. "Project Aurelian" — shown after the © in the footer' },
-    { name: 'web3formsKey', title: 'Web3Forms Access Key', type: 'string', description: 'The access key emailed to you by web3forms.com. Leave blank to show a plain email button instead of the contact form.' },
+    { name: 'formspreeId', title: 'Formspree Form ID', type: 'string', description: 'The ID from your Formspree endpoint (the part after formspree.io/f/). Leave blank to use the ID built into the site.' },
   ],
   preview: { prepare: () => ({ title: 'Site Settings' }) },
 }

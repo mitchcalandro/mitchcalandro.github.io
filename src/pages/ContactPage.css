@@ -1,7 +1,4 @@
 .contact-page__intro { max-width: 700px; margin: 0 auto 2rem; text-align: center; }
-.contact-page__cta { text-align: center; margin-bottom: 3rem; }
-.contact-page__mailto { font-size: 1.1rem; padding: 1rem 2.5rem; }
-.contact-page__cta-note { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem; }
 .contact-page__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
 .contact-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; }
 .contact-card__name { font-family: var(--font-heading); font-size: 1.2rem; color: var(--text-light); }
