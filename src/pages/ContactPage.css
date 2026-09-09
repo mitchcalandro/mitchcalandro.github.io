@@ -1,0 +1,8 @@
+.contact-page__intro { max-width: 700px; margin: 0 auto 2.5rem; text-align: center; }
+.contact-page__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+.contact-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; }
+.contact-card__name { font-family: var(--font-heading); font-size: 1.2rem; color: var(--text-light); }
+.contact-card__role { color: var(--accent-hover); font-size: 0.9rem; margin: 0.25rem 0 1rem; }
+.contact-card__email { display: block; color: var(--accent-hover); text-decoration: none; margin-bottom: 0.5rem; }
+.contact-card__email:hover { color: var(--accent); }
+.contact-card__link { display: inline-block; color: var(--accent-hover); text-decoration: none; }
