@@ -1,3 +1,4 @@
+import ContactForm from '../components/ContactForm'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries } from '../lib/sanity'
 import './ContactPage.css'
@@ -5,8 +6,10 @@ import './ContactPage.css'
 const SUBJECT = 'Project Aurelian Inquiry'
 
 export default function ContactPage() {
+  const { data: settings } = useSanityFetch(queries.siteSettings)
   const { data: contacts } = useSanityFetch(queries.contact)
 
+  const formspreeId = settings?.formspreeId
   const emails = (contacts || []).map((c) => c.email).filter(Boolean)
   const mailtoAll = emails.length > 0
     ? `mailto:${emails.join(',')}?subject=${encodeURIComponent(SUBJECT)}`
@@ -16,10 +19,12 @@ export default function ContactPage() {
     <div className="contact-page page">
       <h1 className="section-title">Contact</h1>
       <p className="section-subtitle contact-page__intro">
-        For inquiries or concerns, the fastest path is email. Response within 48 hours during regular business hours.
+        For inquiries or concerns, send us a message below. Response within 48 hours during regular business hours.
       </p>
 
-      {mailtoAll && (
+      {formspreeId ? (
+        <ContactForm formspreeId={formspreeId} />
+      ) : mailtoAll && (
         <div className="contact-page__cta">
           <a className="btn-primary contact-page__mailto" href={mailtoAll}>Contact Us</a>
           <p className="contact-page__cta-note">Opens your email app, addressed to the whole team.</p>
