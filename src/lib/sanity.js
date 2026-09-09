@@ -15,12 +15,16 @@ export function urlFor(source) {
 }
 
 export const queries = {
-  siteSettings: `*[_type == "siteSettings"][0]{ heroHeadline, heroTagline, goFundMeUrl }`,
+  siteSettings: `*[_type == "siteSettings"][0]{
+    heroHeadline, heroTagline, goFundMeUrl, projectBody, lastUpdated, footerText,
+    currentPhase->{ _id, name, order }
+  }`,
   newsletter: `*[_type == "newsletter"] | order(year desc, month desc){ _id, title, month, year, preview, body }`,
-  about: `*[_type == "aboutContent"][0]{ body, featureBullets, photo }`,
-  rocketSpecs: `*[_type == "rocketSpec"] | order(order asc){ _id, title, body }`,
-  timeline: `*[_type == "timelineMilestone"] | order(year desc, month desc){ _id, month, year, goals }`,
-  members: `*[_type == "member"] | order(order asc){ _id, name, role, photo, resumeUrl, bio }`,
+  newsletterRecent: `*[_type == "newsletter"] | order(year desc, month desc)[0...4]{ _id, title, month, year, preview, body }`,
+  phases: `*[_type == "phase"] | order(order asc){ _id, name, order, shortDescription, body, images }`,
+  faqs: `*[_type == "faq"] | order(order asc){ _id, question, answer }`,
+  members: `*[_type == "member"] | order(order asc){ _id, name, role, photo, resumeUrl, bio, contributions, futureAspirations, githubUrl, linkedInUrl, email }`,
   support: `*[_type == "supportContent"][0]{ body, goFundMeUrl, photo }`,
-  contact: `*[_type == "contactInfo"] | order(order asc){ _id, name, role, email, linkedInUrl }`,
+  contact: `*[_type == "contactInfo"] | order(order asc){ _id, name, role, email, linkedInUrl, githubUrl, photo, formspreeId }`,
+  gallery: `*[_type == "galleryItem"] | order(order asc){ _id, image, caption, phase->{ _id, name } }`,
 }
