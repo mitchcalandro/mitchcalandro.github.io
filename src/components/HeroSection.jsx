@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries } from '../lib/sanity'
 import './HeroSection.css'
@@ -20,7 +21,7 @@ export default function HeroSection() {
           <p className="hero__tagline">
             {data?.heroTagline || 'A bi-propellant liquid rocket, built from scratch.'}
           </p>
-          <a href="#newsletter" className="btn-primary hero__cta">Learn More</a>
+          <Link to="/project" className="btn-primary hero__cta">Learn More</Link>
         </div>
         <div className="hero__scroll-cue" aria-hidden="true">&#8964;</div>
       </div>
