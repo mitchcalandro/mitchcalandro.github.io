@@ -4,4 +4,5 @@ dist/
 .env.local
 studio/node_modules/
 studio/dist/
+studio/.sanity/
 docs/superpowers/
