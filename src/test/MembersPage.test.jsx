@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 
 vi.mock('../hooks/useSanityFetch', () => ({ useSanityFetch: vi.fn() }))
-vi.mock('../lib/sanity', () => ({ queries: { members: 'm' }, urlFor: () => ({ width: () => ({ height: () => ({ url: () => '/p.svg' }) }) }) }))
+vi.mock('../lib/sanity', () => ({ queries: { members: 'm' }, croppedImageUrl: () => '/p.svg' }))
 
 import MembersPage from '../pages/MembersPage'
 

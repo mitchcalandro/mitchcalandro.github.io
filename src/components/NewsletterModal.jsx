@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { PortableText } from '@portabletext/react'
-import { urlFor } from '../lib/sanity'
+import { fullImageUrl } from '../lib/sanity'
 import './NewsletterModal.css'
 
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
@@ -10,7 +10,7 @@ const ptComponents = {
   types: {
     image: ({ value }) => (
       <img
-        src={urlFor(value).width(800).url()}
+        src={fullImageUrl(value, 1600)}
         alt={value.alt || ''}
         className="newsletter-modal__image"
       />

@@ -7,6 +7,8 @@ vi.mock('../../lib/sanity', () => ({
     height: vi.fn().mockReturnThis(),
     url: vi.fn().mockReturnValue('/placeholder-photo.svg'),
   })),
+  croppedImageUrl: vi.fn(() => '/placeholder-photo.svg'),
+  fullImageUrl: vi.fn(() => '/placeholder-photo.svg'),
   queries: {
     siteSettings: '', newsletter: '', newsletterRecent: '', phases: '',
     faqs: '', members: '', support: '', contact: '', gallery: '',

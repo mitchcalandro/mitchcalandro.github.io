@@ -5,7 +5,7 @@ import { useSanityFetch } from '../hooks/useSanityFetch'
 import MembersPreview from '../components/MembersPreview'
 
 vi.mock('../hooks/useSanityFetch', () => ({ useSanityFetch: vi.fn() }))
-vi.mock('../lib/sanity', () => ({ queries: { members: 'm' }, urlFor: () => ({ width: () => ({ height: () => ({ url: () => '/p.svg' }) }) }) }))
+vi.mock('../lib/sanity', () => ({ queries: { members: 'm' }, croppedImageUrl: () => '/p.svg' }))
 
 describe('MembersPreview', () => {
   it('renders member names and a see-more link', () => {

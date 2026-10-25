@@ -1,12 +1,22 @@
 import { PortableText } from '@portabletext/react'
-import { urlFor } from '../lib/sanity'
+import { croppedImageUrl } from '../lib/sanity'
 import './MemberCard.css'
 
+// Must match the aspect-ratio of .member-card__photo for each tier in MemberCard.css.
+// Sizes are roughly twice the largest on-screen size so photos stay sharp on high-DPI screens.
+const PHOTO_SIZES = {
+  leadership: [1200, 900],
+  lead: [600, 600],
+  member: [480, 480],
+}
+
 export default function MemberCard({ member, tier = 'member' }) {
+  const [width, height] = PHOTO_SIZES[tier] || PHOTO_SIZES.member
+
   return (
     <article className={`member-card member-card--${tier}`}>
       <img
-        src={member.photo ? urlFor(member.photo).width(300).height(300).url() : '/placeholder-photo.svg'}
+        src={member.photo ? croppedImageUrl(member.photo, width, height) : '/placeholder-photo.svg'}
         alt={member.name}
         className="member-card__photo"
       />

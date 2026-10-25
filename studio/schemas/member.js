@@ -5,7 +5,13 @@ export default {
   fields: [
     { name: 'name', title: 'Full Name', type: 'string', validation: Rule => Rule.required() },
     { name: 'role', title: 'Role / Title', type: 'string', validation: Rule => Rule.required() },
-    { name: 'photo', title: 'Photo', type: 'image', options: { hotspot: true } },
+    {
+      name: 'photo',
+      title: 'Photo',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'After uploading, click the crop icon on the photo to choose the framing: drag the box to crop, and drag the circle onto the face so it stays centred. Leadership photos show as a wide 4:3 rectangle, everyone else as a square. Upload at least 1000px wide so it stays sharp. Member photos never appear in the Gallery.',
+    },
     { name: 'resumeUrl', title: 'Resume URL', type: 'url', description: 'Link to resume (Google Drive, LinkedIn, PDF, etc.)' },
     { name: 'bio', title: 'About Me', type: 'text', rows: 4, description: 'Short paragraph for potential employers' },
     {

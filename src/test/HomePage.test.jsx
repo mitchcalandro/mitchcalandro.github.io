@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { describe, it, expect, vi } from 'vitest'
 
 vi.mock('../hooks/useSanityFetch', () => ({ useSanityFetch: vi.fn(() => ({ data: null, loading: false })) }))
-vi.mock('../lib/sanity', () => ({ queries: { siteSettings: '', newsletterRecent: '', phases: '', faqs: '' }, urlFor: () => ({ width: () => ({ url: () => '' }) }) }))
+vi.mock('../lib/sanity', () => ({ queries: { siteSettings: '', newsletterRecent: '', phases: '', faqs: '' }, urlFor: () => ({ width: () => ({ url: () => '' }) }), fullImageUrl: () => '' }))
 vi.mock('../components/PhaseTimeline', () => ({ default: () => <div data-testid="phase-timeline" /> }))
 vi.mock('../components/FaqAccordion', () => ({ default: () => <div data-testid="faq" /> }))
 

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useSanityFetch } from '../hooks/useSanityFetch'
-import { queries, urlFor } from '../lib/sanity'
+import { queries, croppedImageUrl } from '../lib/sanity'
 import './MembersPreview.css'
 
 export default function MembersPreview() {
@@ -13,7 +13,7 @@ export default function MembersPreview() {
           <div key={m._id} className="members-preview__item">
             <img
               className="members-preview__photo"
-              src={m.photo ? urlFor(m.photo).width(160).height(160).url() : '/placeholder-photo.svg'}
+              src={m.photo ? croppedImageUrl(m.photo, 200, 200) : '/placeholder-photo.svg'}
               alt={m.name}
             />
             <span className="members-preview__name">{m.name}</span>
