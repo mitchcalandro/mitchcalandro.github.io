@@ -3,12 +3,12 @@ import { PortableText, toPlainText } from '@portabletext/react'
 import { croppedImageUrl } from '../lib/sanity'
 import './MemberCard.css'
 
-// Must match the aspect-ratio of .member-card__photo for each tier in MemberCard.css.
-// Sizes are roughly twice the largest on-screen size so photos stay sharp on high-DPI screens.
+// Every tier shows photos at 4:3 (the aspect-ratio of .member-card__photo in MemberCard.css).
+// Sizes are roughly twice the on-screen size so photos stay sharp on high-DPI screens.
 const PHOTO_SIZES = {
   leadership: [800, 600],
-  lead: [600, 600],
-  member: [480, 480],
+  lead: [640, 480],
+  member: [480, 360],
 }
 
 // Longer About Me / Contributions / Future Aspirations text is cut to this many characters until "Show more"

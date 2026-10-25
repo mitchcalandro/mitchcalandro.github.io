@@ -37,7 +37,7 @@ describe('MemberCard', () => {
     render(<MemberCard member={{ name: 'L', role: 'R', photo }} tier="leadership" />)
     expect(croppedImageUrl).toHaveBeenLastCalledWith(photo, 800, 600)
     render(<MemberCard member={{ name: 'M', role: 'R', photo }} tier="member" />)
-    expect(croppedImageUrl).toHaveBeenLastCalledWith(photo, 480, 480)
+    expect(croppedImageUrl).toHaveBeenLastCalledWith(photo, 480, 360)
   })
 
   it('cuts long contributions to a preview with a Show more / Show less toggle', () => {
