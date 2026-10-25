@@ -11,7 +11,7 @@ const PHOTO_SIZES = {
   member: [480, 480],
 }
 
-// Longer Contributions / Future Aspirations text is cut to this many characters until "Show more"
+// Longer About Me / Contributions / Future Aspirations text is cut to this many characters until "Show more"
 export const PREVIEW_CHARS = 200
 
 function truncate(text, limit) {
@@ -20,22 +20,28 @@ function truncate(text, limit) {
   return `${(lastSpace > limit * 0.6 ? cut.slice(0, lastSpace) : cut).replace(/[\s,;:.\-–—]+$/, '')}…`
 }
 
-function ExpandableText({ label, value }) {
+// Shows a short preview of `text`; `children` is the full version revealed by "Show more"
+function ShowMore({ text, children }) {
   const [expanded, setExpanded] = useState(false)
-  const text = toPlainText(value)
-  const isLong = text.length > PREVIEW_CHARS
+  if (text.length <= PREVIEW_CHARS) return children
 
+  return (
+    <>
+      {expanded ? children : <p>{truncate(text, PREVIEW_CHARS)}</p>}
+      <button className="member-card__more" aria-expanded={expanded} onClick={() => setExpanded(!expanded)}>
+        {expanded ? 'Show less' : 'Show more'}
+      </button>
+    </>
+  )
+}
+
+function RichTextBlock({ label, value }) {
   return (
     <div className="member-card__block">
       <h4 className="member-card__label">{label}</h4>
       <div className="member-card__rt">
-        {isLong && !expanded ? <p>{truncate(text, PREVIEW_CHARS)}</p> : <PortableText value={value} />}
+        <ShowMore text={toPlainText(value)}><PortableText value={value} /></ShowMore>
       </div>
-      {isLong && (
-        <button className="member-card__more" aria-expanded={expanded} onClick={() => setExpanded(!expanded)}>
-          {expanded ? 'Show less' : 'Show more'}
-        </button>
-      )}
     </div>
   )
 }
@@ -54,14 +60,18 @@ export default function MemberCard({ member, tier = 'member' }) {
         <p className="member-card__role">{member.role}</p>
         <h3 className="member-card__name">{member.name}</h3>
 
-        {member.bio && <p className="member-card__bio">{member.bio}</p>}
+        {member.bio && (
+          <div className="member-card__bio">
+            <ShowMore text={member.bio}><p>{member.bio}</p></ShowMore>
+          </div>
+        )}
 
         {member.contributions?.length > 0 && (
-          <ExpandableText label="Contributions" value={member.contributions} />
+          <RichTextBlock label="Contributions" value={member.contributions} />
         )}
 
         {member.futureAspirations?.length > 0 && (
-          <ExpandableText label="Future Aspirations" value={member.futureAspirations} />
+          <RichTextBlock label="Future Aspirations" value={member.futureAspirations} />
         )}
 
         <div className="member-card__links">

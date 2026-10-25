@@ -58,4 +58,12 @@ describe('MemberCard', () => {
     expect(screen.getByText('Built engine.')).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /show more/i })).not.toBeInTheDocument()
   })
+
+  it('gives a long About Me the same Show more toggle', () => {
+    const bio = 'I study aerospace engineering and machine engine parts on the lathe and mill. '.repeat(5).trim()
+    render(<MemberCard member={{ name: 'X', role: 'Y', bio }} />)
+    expect(screen.queryByText(bio)).not.toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Show more' }))
+    expect(screen.getByText(bio)).toBeInTheDocument()
+  })
 })
