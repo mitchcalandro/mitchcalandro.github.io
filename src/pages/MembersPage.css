@@ -4,9 +4,11 @@
   margin-top: 2rem;
 }
 
-/* Scott + Mitchell: two large cards, side by side, stacking on mobile */
+/* Scott + Mitchell: the largest cards, side by side, stacking on mobile. Capped at 400px
+   so headshots aren't blown up past their original resolution and turn grainy. */
 .members-page__tier--leadership {
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 400px));
+  justify-content: center;
   margin-bottom: 3rem;
 }
 

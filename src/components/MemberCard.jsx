@@ -5,7 +5,7 @@ import './MemberCard.css'
 // Must match the aspect-ratio of .member-card__photo for each tier in MemberCard.css.
 // Sizes are roughly twice the largest on-screen size so photos stay sharp on high-DPI screens.
 const PHOTO_SIZES = {
-  leadership: [1200, 900],
+  leadership: [800, 600],
   lead: [600, 600],
   member: [480, 480],
 }
