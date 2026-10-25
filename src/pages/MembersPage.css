@@ -4,15 +4,13 @@
   margin-top: 2rem;
 }
 
-/* Scott + Mitchell: the largest cards, side by side, stacking on mobile. Capped at 440px
-   so headshots aren't blown up far past their original resolution and turn grainy. */
+/* Scott + Mitchell: one full-width card each, stacked (layout inside is in MemberCard.css) */
 .members-page__tier--leadership {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 440px));
-  justify-content: center;
+  grid-template-columns: 1fr;
   margin-bottom: 3rem;
 }
 
-/* Fixed card widths keep the hierarchy on every screen: leadership 440px > leads 264px >
+/* Fixed card widths keep the hierarchy on every screen: leadership full width > leads 264px >
    members 240px. At full width that is 4 per row for both; rows wrap and centre on smaller
    screens. Both widths are sized (with the padding and role font in MemberCard.css) so the
    longest roles, "Structures/Manufacturing Lead/Member", stay on one line. */
