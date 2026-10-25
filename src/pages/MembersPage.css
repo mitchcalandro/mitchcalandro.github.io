@@ -12,11 +12,12 @@
   margin-bottom: 3rem;
 }
 
-.members-page__tier--lead {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  margin-bottom: 2.5rem;
+/* Leads and members share one grid: at most 4 per row, each card at least 264px so the longest
+   roles ("Structures/Manufacturing Lead/Member") stay on one line. Sharing it also means a
+   member card is never wider than a lead card. */
+.members-page__tier--lead,
+.members-page__tier--member {
+  grid-template-columns: repeat(auto-fill, minmax(max(min(264px, 100%), calc((100% - 3 * 1.5rem) / 4)), 1fr));
 }
 
-.members-page__tier--member {
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-}
+.members-page__tier--lead { margin-bottom: 2.5rem; }
