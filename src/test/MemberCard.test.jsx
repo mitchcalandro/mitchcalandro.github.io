@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 
 vi.mock('../lib/sanity', () => ({ croppedImageUrl: vi.fn(() => '/p.svg') }))
-import MemberCard from '../components/MemberCard'
+import MemberCard, { PREVIEW_CHARS } from '../components/MemberCard'
 import { croppedImageUrl } from '../lib/sanity'
 
 const member = {
@@ -38,5 +38,24 @@ describe('MemberCard', () => {
     expect(croppedImageUrl).toHaveBeenLastCalledWith(photo, 800, 600)
     render(<MemberCard member={{ name: 'M', role: 'R', photo }} tier="member" />)
     expect(croppedImageUrl).toHaveBeenLastCalledWith(photo, 480, 480)
+  })
+
+  it('cuts long contributions to a preview with a Show more / Show less toggle', () => {
+    const long = 'Built the engine test stand and ran every hot fire. '.repeat(10).trim()
+    render(<MemberCard member={{ name: 'X', role: 'Y', contributions: [{ _type: 'block', _key: 'l', children: [{ _type: 'span', text: long }] }] }} />)
+    expect(screen.queryByText(long)).not.toBeInTheDocument()
+    const preview = screen.getByText(/…$/).textContent
+    expect(preview.length).toBeLessThanOrEqual(PREVIEW_CHARS + 1)
+
+    fireEvent.click(screen.getByRole('button', { name: 'Show more' }))
+    expect(screen.getByText(long)).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Show less' }))
+    expect(screen.queryByText(long)).not.toBeInTheDocument()
+  })
+
+  it('shows short text in full with no toggle', () => {
+    render(<MemberCard member={member} />)
+    expect(screen.getByText('Built engine.')).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /show more/i })).not.toBeInTheDocument()
   })
 })

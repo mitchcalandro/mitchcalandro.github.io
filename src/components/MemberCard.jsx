@@ -1,4 +1,5 @@
-import { PortableText } from '@portabletext/react'
+import { useState } from 'react'
+import { PortableText, toPlainText } from '@portabletext/react'
 import { croppedImageUrl } from '../lib/sanity'
 import './MemberCard.css'
 
@@ -8,6 +9,35 @@ const PHOTO_SIZES = {
   leadership: [800, 600],
   lead: [600, 600],
   member: [480, 480],
+}
+
+// Longer Contributions / Future Aspirations text is cut to this many characters until "Show more"
+export const PREVIEW_CHARS = 200
+
+function truncate(text, limit) {
+  const cut = text.slice(0, limit)
+  const lastSpace = cut.lastIndexOf(' ')
+  return `${(lastSpace > limit * 0.6 ? cut.slice(0, lastSpace) : cut).replace(/[\s,;:.\-–—]+$/, '')}…`
+}
+
+function ExpandableText({ label, value }) {
+  const [expanded, setExpanded] = useState(false)
+  const text = toPlainText(value)
+  const isLong = text.length > PREVIEW_CHARS
+
+  return (
+    <div className="member-card__block">
+      <h4 className="member-card__label">{label}</h4>
+      <div className="member-card__rt">
+        {isLong && !expanded ? <p>{truncate(text, PREVIEW_CHARS)}</p> : <PortableText value={value} />}
+      </div>
+      {isLong && (
+        <button className="member-card__more" aria-expanded={expanded} onClick={() => setExpanded(!expanded)}>
+          {expanded ? 'Show less' : 'Show more'}
+        </button>
+      )}
+    </div>
+  )
 }
 
 export default function MemberCard({ member, tier = 'member' }) {
@@ -27,17 +57,11 @@ export default function MemberCard({ member, tier = 'member' }) {
         {member.bio && <p className="member-card__bio">{member.bio}</p>}
 
         {member.contributions?.length > 0 && (
-          <div className="member-card__block">
-            <h4 className="member-card__label">Contributions</h4>
-            <div className="member-card__rt"><PortableText value={member.contributions} /></div>
-          </div>
+          <ExpandableText label="Contributions" value={member.contributions} />
         )}
 
         {member.futureAspirations?.length > 0 && (
-          <div className="member-card__block">
-            <h4 className="member-card__label">Future Aspirations</h4>
-            <div className="member-card__rt"><PortableText value={member.futureAspirations} /></div>
-          </div>
+          <ExpandableText label="Future Aspirations" value={member.futureAspirations} />
         )}
 
         <div className="member-card__links">
