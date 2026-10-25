@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useSanityFetch } from '../hooks/useSanityFetch'
-import { queries } from '../lib/sanity'
+import { queries, urlFor } from '../lib/sanity'
 import './HeroSection.css'
 
 export default function HeroSection() {
@@ -10,7 +10,7 @@ export default function HeroSection() {
     <section id="home" className="hero">
       <img
         className="hero__image"
-        src="/placeholder-hero.svg"
+        src={data?.heroImage ? urlFor(data.heroImage).width(1920).url() : '/placeholder-hero.svg'}
         alt="Project Aurelian rocket"
       />
       <div className="hero__overlay">

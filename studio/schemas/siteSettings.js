@@ -17,6 +17,13 @@ export default {
       description: '2–3 sentence tagline shown under the headline',
     },
     {
+      name: 'heroImage',
+      title: 'Hero Image',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Full-width background photo behind the headline on the Home page. Wide landscape photos work best (at least 1920px wide). Use the hotspot to keep the important part in frame.',
+    },
+    {
       name: 'goFundMeUrl',
       title: 'GoFundMe URL',
       type: 'url',
