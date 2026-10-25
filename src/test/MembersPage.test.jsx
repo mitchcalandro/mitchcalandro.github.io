@@ -59,4 +59,16 @@ describe('MembersPage', () => {
     render(<MembersPage />)
     expect(screen.getByText(/team roster coming soon/i)).toBeInTheDocument()
   })
+
+  it('reads the numeric tiers the Studio stores (1 leadership, 2 lead, 3 member)', () => {
+    useSanityFetch.mockReturnValue({ data: [
+      { _id: 'a', name: 'Numbered Lead', role: 'R', tier: 2 },
+      { _id: 'b', name: 'Numbered Boss', role: 'R', tier: 1 },
+      { _id: 'c', name: 'Numbered Member', role: 'R', tier: 3 },
+    ], loading: false })
+    const { container } = render(<MembersPage />)
+    const names = [...container.querySelectorAll('.member-card__name')].map((n) => n.textContent)
+    expect(names).toEqual(['Numbered Boss', 'Numbered Lead', 'Numbered Member'])
+    expect(container.querySelectorAll('.member-card--leadership')).toHaveLength(1)
+  })
 })

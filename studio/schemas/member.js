@@ -17,14 +17,15 @@ export default {
     {
       name: 'tier',
       title: 'Tier',
-      type: 'string',
+      // Stored as a number so the Studio list can sort by role (leadership first)
+      type: 'number',
       description: 'Controls how prominently this person appears on the Members page',
-      initialValue: 'member',
+      initialValue: 3,
       options: {
         list: [
-          { title: 'Leadership (large, top of page)', value: 'leadership' },
-          { title: 'Discipline Lead (medium)', value: 'lead' },
-          { title: 'Member (small)', value: 'member' },
+          { title: 'Leadership (large, top of page)', value: 1 },
+          { title: 'Discipline Lead (medium)', value: 2 },
+          { title: 'Member (small)', value: 3 },
         ],
         layout: 'radio',
       },
@@ -33,6 +34,13 @@ export default {
     { name: 'contributions', title: 'Contributions', type: 'array', of: [{ type: 'block' }] },
     { name: 'futureAspirations', title: 'Future Aspirations', type: 'array', of: [{ type: 'block' }] },
     { name: 'githubUrl', title: 'GitHub URL', type: 'url' },
+  ],
+  orderings: [
+    {
+      title: 'Role, then Display Order',
+      name: 'roleThenDisplayOrder',
+      by: [{ field: 'tier', direction: 'asc' }, { field: 'order', direction: 'asc' }, { field: 'name', direction: 'asc' }],
+    },
   ],
   preview: {
     select: { title: 'name', subtitle: 'role' },
