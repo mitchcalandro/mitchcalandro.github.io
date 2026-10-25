@@ -57,11 +57,12 @@
 .member-card--leadership .member-card__name { font-size: 1.5rem; }
 .member-card--leadership .member-card__role { font-size: 1rem; }
 
+.member-card--lead { padding: 1.25rem; }
 .member-card--lead .member-card__name { font-size: 1.05rem; }
 
-.member-card--member { padding: 1rem; }
+.member-card--member { padding: 0.875rem; }
 .member-card--member .member-card__name { font-size: 0.95rem; }
-.member-card--member .member-card__role { font-size: 0.78rem; }
+.member-card--member .member-card__role { font-size: 0.72rem; }
 .member-card--member .member-card__bio { font-size: 0.82rem; }
 
 @media (max-width: 600px) {

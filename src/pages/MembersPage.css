@@ -12,10 +12,10 @@
   margin-bottom: 3rem;
 }
 
-/* Fixed card widths keep the hierarchy on every screen: leadership 400px > leads 340px >
-   members 264px. At full width that is 3 leads and 4 members per row; rows wrap and centre
-   on smaller screens. 264px is the narrowest that keeps "Structures/Manufacturing Member"
-   on one line. */
+/* Fixed card widths keep the hierarchy on every screen: leadership 400px > leads 264px >
+   members 240px. At full width that is 4 per row for both; rows wrap and centre on smaller
+   screens. Both widths are sized (with the padding and role font in MemberCard.css) so the
+   longest roles, "Structures/Manufacturing Lead/Member", stay on one line. */
 .members-page__tier--lead,
 .members-page__tier--member {
   display: flex;
@@ -23,7 +23,7 @@
   justify-content: center;
 }
 
-.members-page__tier--lead > .member-card { width: min(100%, 340px); }
-.members-page__tier--member > .member-card { width: min(100%, 264px); }
+.members-page__tier--lead > .member-card { width: min(100%, 264px); }
+.members-page__tier--member > .member-card { width: min(100%, 240px); }
 
 .members-page__tier--lead { margin-bottom: 2.5rem; }

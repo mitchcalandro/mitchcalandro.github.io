@@ -7,8 +7,8 @@ import './MemberCard.css'
 // Sizes are roughly twice the on-screen size so photos stay sharp on high-DPI screens.
 const PHOTO_SIZES = {
   leadership: [800, 600],
-  lead: [640, 480],
-  member: [480, 360],
+  lead: [480, 360],
+  member: [440, 330],
 }
 
 // Longer About Me / Contributions / Future Aspirations text is cut to this many characters until "Show more"
