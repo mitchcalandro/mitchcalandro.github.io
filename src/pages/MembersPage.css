@@ -10,18 +10,40 @@
   margin-bottom: 3rem;
 }
 
-/* Fixed card widths keep the hierarchy on every screen: leadership full width > leads 264px >
-   members 240px. At full width that is 4 per row for both; rows wrap and centre on smaller
-   screens. Both widths are sized (with the padding and role font in MemberCard.css) so the
-   longest roles, "Structures/Manufacturing Lead/Member", stay on one line. */
+/* Leads and members widen when there are fewer than 4, but the tiers never cross: leads
+   are never wider than 3 per row (so a lead photo stays smaller than a leadership photo),
+   and a member card is about 15% narrower than a lead card (never under 240px, and always
+   at least 24px narrower). Every card in a tier is
+   the same width; a short last row is centred. --leads and --members come from
+   MembersPage.jsx. --max-cols drops on narrower screens so cards never get narrow enough
+   for "Structures/Manufacturing Lead/Member" to wrap (leads need 264px, members 240px). */
+.members-page {
+  --gap: 1.5rem;
+  --max-cols: 4;
+  --lead-cols: min(max(var(--leads), 3), 4, var(--max-cols));
+  --member-cols: min(max(var(--members), 3), 4, var(--max-cols));
+  --lead-width: min(calc((100% - (var(--lead-cols) - 1) * var(--gap)) / var(--lead-cols)), calc(100% - 3rem));
+}
+
 .members-page__tier--lead,
 .members-page__tier--member {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: var(--gap);
 }
 
-.members-page__tier--lead > .member-card { width: min(100%, 264px); }
-.members-page__tier--member > .member-card { width: min(100%, 240px); }
+.members-page__tier--lead > .member-card { width: var(--lead-width); }
+.members-page__tier--member > .member-card {
+  width: min(
+    calc((100% - (var(--member-cols) - 1) * var(--gap)) / var(--member-cols)),
+    max(calc(var(--lead-width) * 0.85), 240px),
+    calc(var(--lead-width) - 24px)
+  );
+}
 
 .members-page__tier--lead { margin-bottom: 2.5rem; }
+
+@media (max-width: 1199px) { .members-page { --max-cols: 3; } }
+@media (max-width: 903px)  { .members-page { --max-cols: 2; } }
+@media (max-width: 599px)  { .members-page { --max-cols: 1; } }

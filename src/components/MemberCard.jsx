@@ -5,10 +5,11 @@ import './MemberCard.css'
 
 // Every tier shows photos at 4:3 (the aspect-ratio of .member-card__photo in MemberCard.css).
 // Sizes are roughly twice the on-screen size so photos stay sharp on high-DPI screens.
+// Lead and member cards widen when a row isn't full: leads up to about 410px, members 350px.
 const PHOTO_SIZES = {
   leadership: [800, 600],
-  lead: [480, 360],
-  member: [440, 330],
+  lead: [880, 660],
+  member: [720, 540],
 }
 
 // Longer About Me / Contributions / Future Aspirations text is cut to this many characters until "Show more"
