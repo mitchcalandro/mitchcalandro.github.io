@@ -14,8 +14,8 @@ const state = (over = {}) => [{ succeeded: false, submitting: false, errors: nul
 describe('ContactForm', () => {
   it('renders name, email, and message fields wired to the given form id', () => {
     mockUseForm.mockReturnValue(state())
-    render(<ContactForm formspreeId="xrpgrlkb" />)
-    expect(mockUseForm).toHaveBeenCalledWith('xrpgrlkb')
+    render(<ContactForm formspreeId="xyeeeykj" />)
+    expect(mockUseForm).toHaveBeenCalledWith('xyeeeykj')
     expect(screen.getByLabelText(/your name/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/your email/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/message/i)).toBeInTheDocument()
@@ -24,20 +24,20 @@ describe('ContactForm', () => {
 
   it('shows a thank-you message on success', () => {
     mockUseForm.mockReturnValue(state({ succeeded: true }))
-    render(<ContactForm formspreeId="xrpgrlkb" />)
+    render(<ContactForm formspreeId="xyeeeykj" />)
     expect(screen.getByText(/thank you/i)).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /send/i })).not.toBeInTheDocument()
   })
 
   it('disables the button and shows progress while submitting', () => {
     mockUseForm.mockReturnValue(state({ submitting: true }))
-    render(<ContactForm formspreeId="xrpgrlkb" />)
+    render(<ContactForm formspreeId="xyeeeykj" />)
     expect(screen.getByRole('button', { name: /sending/i })).toBeDisabled()
   })
 
   it('shows an error message when submission fails', () => {
     mockUseForm.mockReturnValue(state({ errors: [{ message: 'nope' }] }))
-    render(<ContactForm formspreeId="xrpgrlkb" />)
+    render(<ContactForm formspreeId="xyeeeykj" />)
     expect(screen.getByText(/something went wrong/i)).toBeInTheDocument()
   })
 

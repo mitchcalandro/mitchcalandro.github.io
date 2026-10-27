@@ -3,7 +3,7 @@ import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries } from '../lib/sanity'
 import './ContactPage.css'
 
-const DEFAULT_FORMSPREE_ID = 'xrpgrlkb'
+const DEFAULT_FORMSPREE_ID = 'xyeeeykj'
 
 export default function ContactPage() {
   const { data: settings } = useSanityFetch(queries.siteSettings)

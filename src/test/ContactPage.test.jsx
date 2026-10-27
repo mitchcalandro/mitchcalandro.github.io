@@ -32,7 +32,7 @@ describe('ContactPage', () => {
     render(<ContactPage />)
     const forms = screen.getAllByTestId('contact-form')
     expect(forms).toHaveLength(1)
-    expect(forms[0]).toHaveAttribute('data-form-id', 'xrpgrlkb')
+    expect(forms[0]).toHaveAttribute('data-form-id', 'xyeeeykj')
   })
 
   it('lets Sanity override the form id', () => {
