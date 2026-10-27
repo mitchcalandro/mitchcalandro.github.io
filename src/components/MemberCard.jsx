@@ -78,6 +78,9 @@ export default function MemberCard({ member, tier = 'member' }) {
           {member.resumeUrl && (
             <a href={member.resumeUrl} target="_blank" rel="noopener noreferrer" className="member-card__link">Resume ↗</a>
           )}
+          {member.portfolioUrl && (
+            <a href={member.portfolioUrl} target="_blank" rel="noopener noreferrer" className="member-card__link">Portfolio ↗</a>
+          )}
           {member.linkedInUrl && (
             <a href={member.linkedInUrl} target="_blank" rel="noopener noreferrer" className="member-card__link">LinkedIn</a>
           )}

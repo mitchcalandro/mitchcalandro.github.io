@@ -12,7 +12,6 @@ export default {
       options: { hotspot: true },
       description: 'After uploading, click the crop icon on the photo to choose the framing: drag the box to crop, and drag the circle onto the face so it stays centred. Photos show as a 4:3 rectangle (a bit wider than tall). Upload at least 1000px wide so it stays sharp. Member photos never appear in the Gallery.',
     },
-    { name: 'resumeUrl', title: 'Resume URL', type: 'url', description: 'Link to resume (Google Drive, LinkedIn, PDF, etc.)' },
     { name: 'bio', title: 'About Me', type: 'text', rows: 4, description: 'Short paragraph for potential employers' },
     {
       name: 'tier',
@@ -33,6 +32,8 @@ export default {
     { name: 'order', title: 'Display Order', type: 'number', description: 'Lower number = appears first within a tier' },
     { name: 'contributions', title: 'Contributions', type: 'array', of: [{ type: 'block' }] },
     { name: 'futureAspirations', title: 'Future Aspirations', type: 'array', of: [{ type: 'block' }] },
+    { name: 'resumeUrl', title: 'Resume URL', type: 'url', description: 'Link to resume (Google Drive, LinkedIn, PDF, etc.)' },
+    { name: 'portfolioUrl', title: 'Portfolio URL', type: 'url', description: 'Link to a personal portfolio or website. Leave empty to hide the button.' },
     { name: 'githubUrl', title: 'GitHub URL', type: 'url' },
   ],
   orderings: [

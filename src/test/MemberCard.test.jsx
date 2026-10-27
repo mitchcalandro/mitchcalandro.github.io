@@ -9,7 +9,7 @@ const member = {
   name: 'Scott Meeson', role: 'Lead Engineer', photo: null,
   bio: 'Bio text', contributions: [{ _type: 'block', _key: 'c', children: [{ _type: 'span', text: 'Built engine.' }] }],
   futureAspirations: [{ _type: 'block', _key: 'f', children: [{ _type: 'span', text: 'Go to space.' }] }],
-  resumeUrl: 'https://x.com/r.pdf', linkedInUrl: 'https://linkedin.com/in/x',
+  resumeUrl: 'https://x.com/r.pdf', portfolioUrl: 'https://x.com/folio', linkedInUrl: 'https://linkedin.com/in/x',
   githubUrl: 'https://github.com/x', email: 'scott@example.com',
 }
 
@@ -21,6 +21,7 @@ describe('MemberCard', () => {
     expect(screen.getByText('Built engine.')).toBeInTheDocument()
     expect(screen.getByText('Go to space.')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /resume/i })).toHaveAttribute('href', 'https://x.com/r.pdf')
+    expect(screen.getByRole('link', { name: /portfolio/i })).toHaveAttribute('href', 'https://x.com/folio')
     expect(screen.getByRole('link', { name: /linkedin/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /github/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /email/i })).toHaveAttribute('href', 'mailto:scott@example.com')
@@ -29,6 +30,7 @@ describe('MemberCard', () => {
   it('omits links that are not provided', () => {
     render(<MemberCard member={{ name: 'X', role: 'Y', photo: null }} />)
     expect(screen.queryByRole('link', { name: /resume/i })).not.toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /portfolio/i })).not.toBeInTheDocument()
     expect(screen.queryByRole('link', { name: /github/i })).not.toBeInTheDocument()
   })
 
