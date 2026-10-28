@@ -10,7 +10,7 @@ export default {
       title: 'Photo',
       type: 'image',
       options: { hotspot: true },
-      description: 'After uploading, click the crop icon on the photo to choose the framing: drag the box to crop, and drag the circle onto the face so it stays centred. Photos show as a 4:3 rectangle (a bit wider than tall). Upload at least 1000px wide so it stays sharp. Member photos never appear in the Gallery.',
+      description: 'After uploading, click the crop icon on the photo to choose the framing: drag the box to crop, and drag the circle onto the face so it stays centred. Photos show as a 4:3 rectangle (a bit wider than tall), except Leadership, which shows as a taller 4:5 portrait, so leave room above the head and below the shoulders. Upload at least 1000px wide so it stays sharp. Member photos never appear in the Gallery.',
     },
     { name: 'bio', title: 'About Me', type: 'text', rows: 4, description: 'Short paragraph for potential employers' },
     {

@@ -3,11 +3,12 @@ import { PortableText, toPlainText } from '@portabletext/react'
 import { croppedImageUrl } from '../lib/sanity'
 import './MemberCard.css'
 
-// Every tier shows photos at 4:3 (the aspect-ratio of .member-card__photo in MemberCard.css).
+// Photos are 4:3, except leadership, which is a 4:5 portrait beside the text (see MemberCard.css).
+// Leadership cards stack on phones, so they get a separate 4:3 crop there.
 // Sizes are roughly twice the on-screen size so photos stay sharp on high-DPI screens.
 // Lead and member cards widen when a row isn't full: leads up to about 410px, members 350px.
 const PHOTO_SIZES = {
-  leadership: [800, 600],
+  leadership: [760, 950],
   lead: [880, 660],
   member: [720, 540],
 }
@@ -52,11 +53,16 @@ export default function MemberCard({ member, tier = 'member' }) {
 
   return (
     <article className={`member-card member-card--${tier}`}>
-      <img
-        src={member.photo ? croppedImageUrl(member.photo, width, height) : '/placeholder-photo.svg'}
-        alt={member.name}
-        className="member-card__photo"
-      />
+      <picture>
+        {member.photo && tier === 'leadership' && (
+          <source media="(max-width: 760px)" srcSet={croppedImageUrl(member.photo, 800, 600)} />
+        )}
+        <img
+          src={member.photo ? croppedImageUrl(member.photo, width, height) : '/placeholder-photo.svg'}
+          alt={member.name}
+          className="member-card__photo"
+        />
+      </picture>
       <div className="member-card__info">
         <p className="member-card__role">{member.role}</p>
         <h3 className="member-card__name">{member.name}</h3>

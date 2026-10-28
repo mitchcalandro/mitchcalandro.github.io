@@ -37,7 +37,8 @@ describe('MemberCard', () => {
   it('requests the photo in the exact shape of its tier box so the Studio crop is honoured', () => {
     const photo = { asset: { _ref: 'image-a' }, crop: { top: 0.1 }, hotspot: { x: 0.5, y: 0.3 } }
     render(<MemberCard member={{ name: 'L', role: 'R', photo }} tier="leadership" />)
-    expect(croppedImageUrl).toHaveBeenLastCalledWith(photo, 800, 600)
+    expect(croppedImageUrl).toHaveBeenLastCalledWith(photo, 760, 950)
+    expect(croppedImageUrl).toHaveBeenCalledWith(photo, 800, 600) // stacked 4:3 crop for phones
     render(<MemberCard member={{ name: 'M', role: 'R', photo }} tier="member" />)
     expect(croppedImageUrl).toHaveBeenLastCalledWith(photo, 720, 540)
   })
