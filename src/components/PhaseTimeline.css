@@ -1,55 +1,114 @@
 .phase-timeline {
+  --dot: 44px;
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0;
-  padding: 2rem 0;
+  padding: 3rem 0 1rem;
   margin: 0;
 }
+
 .phase-timeline__node {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   flex: 1 1 0;
-  min-width: 120px;
+  min-width: 0;
   text-align: center;
 }
+
 .phase-timeline__dot {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--card-bg);
-  border: 2px solid var(--border);
+  position: relative;
   z-index: 1;
-}
-.phase-timeline__node--current .phase-timeline__dot {
-  background: var(--accent);
-  border-color: var(--accent-hover);
-  box-shadow: 0 0 12px rgba(37, 99, 235, 0.6);
-}
-.phase-timeline__label {
-  margin-top: 0.75rem;
-  font-size: 0.85rem;
-  color: var(--text-muted);
+  width: var(--dot);
+  height: var(--dot);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
   font-family: var(--font-heading);
-  letter-spacing: 0.03em;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  background: var(--bg-dark);
+  border: 2px solid rgba(255,255,255,0.15);
+  transition: transform var(--transition);
 }
-.phase-timeline__node--current .phase-timeline__label { color: var(--accent-hover); }
+
+.phase-timeline__node--done .phase-timeline__dot {
+  color: var(--text-light);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Current phase: bigger, with an orange ring and glow */
+.phase-timeline__node--current .phase-timeline__dot {
+  color: var(--text-light);
+  background: var(--accent);
+  border-color: var(--flame);
+  transform: scale(1.2);
+  box-shadow: 0 0 0 6px rgba(251,146,60,0.18), 0 0 28px rgba(251,146,60,0.45);
+}
+
+.phase-timeline__label {
+  margin-top: 1rem;
+  padding: 0 0.4rem;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+
+.phase-timeline__node--done .phase-timeline__label { color: rgba(248,250,252,0.85); }
+.phase-timeline__node--current .phase-timeline__label { color: var(--text-light); font-weight: 700; margin-top: 1.4rem; }
+
+.phase-timeline__now {
+  display: block;
+  width: max-content;
+  margin: 0.45rem auto 0;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--flame);
+  border: 1px solid rgba(251,146,60,0.5);
+}
+
+/* Line to the next phase: solid and "burned" up to the current phase, dashed after it */
 .phase-timeline__connector {
   position: absolute;
-  top: 9px;
+  top: calc(var(--dot) / 2 - 1.5px);
   left: 50%;
   width: 100%;
-  height: 2px;
-  background: var(--border);
-  z-index: 0;
+  height: 3px;
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,0.18) 0 8px, transparent 8px 14px);
 }
+
+.phase-timeline__node--done .phase-timeline__connector {
+  background: var(--accent);
+}
+
+/* the segment arriving at the current phase warms from blue to orange */
+.phase-timeline__node--done:has(+ .phase-timeline__node--current) .phase-timeline__connector {
+  background: linear-gradient(90deg, var(--accent), var(--flame));
+}
+
 .phase-timeline__empty { color: var(--text-muted); text-align: center; padding: 2rem 0; }
 
+/* Phones: a vertical track with the labels beside the dots */
 @media (max-width: 768px) {
-  .phase-timeline { flex-direction: column; align-items: flex-start; }
-  .phase-timeline__node { flex-direction: row; gap: 0.75rem; min-width: 0; width: 100%; }
-  .phase-timeline__connector { display: none; }
-  .phase-timeline__label { margin-top: 0; }
+  .phase-timeline { --dot: 38px; flex-direction: column; padding: 2rem 0 0; }
+  .phase-timeline__node { flex-direction: row; align-items: flex-start; gap: 1rem; text-align: left; padding-bottom: 1.5rem; }
+  .phase-timeline__label { margin-top: 0; padding: calc(var(--dot) / 2 - 0.65rem) 0 0; }
+  .phase-timeline__node--current .phase-timeline__label { margin-top: 0; }
+  .phase-timeline__now { display: inline-block; margin: 0 0 0 0.6rem; }
+  .phase-timeline__connector {
+    top: var(--dot);
+    left: calc(var(--dot) / 2 - 1.5px);
+    width: 3px;
+    height: calc(100% - var(--dot));
+    background: repeating-linear-gradient(180deg, rgba(255,255,255,0.18) 0 8px, transparent 8px 14px);
+  }
+  .phase-timeline__node--done:has(+ .phase-timeline__node--current) .phase-timeline__connector {
+    background: linear-gradient(180deg, var(--accent), var(--flame));
+  }
 }

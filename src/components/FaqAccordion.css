@@ -1,4 +1,4 @@
-.faq { display: flex; flex-direction: column; gap: 0.75rem; max-width: 800px; margin: 0 auto; }
+.faq { display: flex; flex-direction: column; gap: 0.75rem; max-width: 900px; margin-top: 1.5rem; }
 .faq__item { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .faq__question {
   width: 100%;

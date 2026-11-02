@@ -1,4 +1,4 @@
-.home__section { padding-top: 4rem; padding-bottom: 4rem; }
+.home__section { padding-top: 5rem; padding-bottom: 5rem; border-top: 1px solid var(--border); }
 .home__current-phase {
   display: inline-block;
   font-family: var(--font-heading);
@@ -7,12 +7,12 @@
   text-decoration: none;
   margin-bottom: 1rem;
 }
-.home__current-phase:hover { color: var(--accent); }
+.home__current-phase:hover { color: var(--flame); text-decoration: none; }
 .home__newsletter-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin: 1.5rem 0;
 }
 .home__catch-up {
   display: inline-block;
@@ -21,4 +21,4 @@
   font-weight: 600;
   margin-top: 1rem;
 }
-.home__catch-up:hover { color: var(--accent); }
+.home__catch-up:hover { color: var(--flame); text-decoration: none; }

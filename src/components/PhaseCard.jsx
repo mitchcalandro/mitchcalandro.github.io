@@ -1,18 +1,47 @@
+import { useState } from 'react'
 import { PortableText } from '@portabletext/react'
+import Modal from './Modal'
+import { fullImageUrl } from '../lib/sanity'
 import './PhaseCard.css'
 
-export default function PhaseCard({ phase, isOpen, onToggle }) {
+const ptComponents = {
+  types: {
+    image: ({ value }) => value?.asset
+      ? <img src={fullImageUrl(value, 1400)} alt={value.alt || ''} className="phase-modal__image" />
+      : null,
+  },
+}
+
+export default function PhaseCard({ phase }) {
+  const [open, setOpen] = useState(false)
+  const images = (phase.images || []).filter((img) => img?.asset)
+
   return (
-    <div className={`phase-card ${isOpen ? 'phase-card--open' : ''}`}>
-      <button className="phase-card__header" aria-expanded={isOpen} onClick={() => onToggle(phase._id)}>
+    <>
+      <button className="phase-card" aria-haspopup="dialog" onClick={() => setOpen(true)}>
         <span className="phase-card__name">{phase.name}</span>
         {phase.shortDescription && <span className="phase-card__desc">{phase.shortDescription}</span>}
+        <span className="phase-card__more">Details →</span>
       </button>
-      {isOpen && (
-        <div className="phase-card__body rich-text">
-          {phase.body?.length > 0 ? <PortableText value={phase.body} /> : <p>Details coming soon.</p>}
-        </div>
+
+      {open && (
+        <Modal onClose={() => setOpen(false)}>
+          <h2 className="phase-modal__title">{phase.name}</h2>
+          {phase.shortDescription && <p className="phase-modal__desc">{phase.shortDescription}</p>}
+          <div className="phase-modal__body rich-text">
+            {phase.body?.length > 0
+              ? <PortableText value={phase.body} components={ptComponents} />
+              : <p>Details coming soon.</p>}
+          </div>
+          {images.length > 0 && (
+            <div className="phase-modal__gallery">
+              {images.map((img) => (
+                <img key={img._key || img.asset._ref} src={fullImageUrl(img, 900)} alt={img.alt || phase.name} />
+              ))}
+            </div>
+          )}
+        </Modal>
       )}
-    </div>
+    </>
   )
 }

@@ -1,9 +1,10 @@
 .hero {
+  position: relative;
+  overflow: hidden;
   padding-top: calc(var(--navbar-height) + 3rem);
-  background:
-    radial-gradient(ellipse at 85% 0%, rgba(37,99,235,0.18), transparent 55%),
-    var(--bg-dark);
 }
+
+.hero__inner { position: relative; }
 
 /* Big title on the left, small round logo on the right, with a rule above like a page masthead */
 .hero__header {
@@ -13,12 +14,12 @@
   gap: 2rem;
   padding-top: 1.5rem;
   border-top: 2px solid var(--accent);
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
 }
 
 .hero__headline {
   font-size: clamp(2.75rem, 9vw, 6.5rem);
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1;
   text-transform: uppercase;
   /* one word per line, and the box always as wide as the longest word so the gradient never clips */
@@ -27,6 +28,14 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  filter: drop-shadow(0 0 40px rgba(37,99,235,0.35));
+}
+
+.hero__tagline {
+  font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+  font-weight: 300;
+  color: rgba(248,250,252,0.8);
+  margin-top: 1.25rem;
 }
 
 .hero__logo {
@@ -35,18 +44,79 @@
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--border);
+  box-shadow: 0 0 40px rgba(37,99,235,0.25);
   flex-shrink: 0;
+}
+
+/* Live project status: current phase, progress through the phases, team size */
+.hero__status {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 1.5);
+  background: rgba(22,31,53,0.6);
+  backdrop-filter: blur(6px);
+  margin-bottom: 4rem;
+}
+
+.hero__stat { padding: 1.1rem 1.5rem; }
+.hero__stat + .hero__stat { border-left: 1px solid var(--border); }
+.hero__stat--progress { grid-column: span 2; }
+
+.hero__stat dt {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.hero__stat dd {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hero__stat dd a { color: var(--text-light); }
+.hero__stat dd a:hover { color: var(--accent-hover); text-decoration: none; }
+
+.hero__bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+
+.hero__bar > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--flame));
 }
 
 /* Photo beside "Who are we?" */
 .hero__about {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 3rem;
+  gap: 4rem;
   align-items: center;
 }
 
+/* Offset outline behind the photo */
+.hero__media { position: relative; }
+.hero__media::before {
+  content: '';
+  position: absolute;
+  inset: 1.25rem -1.25rem -1.25rem 1.25rem;
+  border: 1px solid rgba(96,165,250,0.45);
+  border-radius: calc(var(--radius) * 2);
+}
+
 .hero__image {
+  position: relative;
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
@@ -60,6 +130,15 @@
   margin-bottom: 1.25rem;
 }
 
+.hero__lead {
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  line-height: 1.65;
+  color: var(--text-light);
+  white-space: pre-line;
+  max-width: 34em;
+  margin-bottom: 2.25rem;
+}
+
 /* pre-line keeps the paragraph breaks typed into the Studio */
 .hero__text {
   font-size: 1.1rem;
@@ -67,8 +146,11 @@
   color: rgba(248,250,252,0.85);
   white-space: pre-line;
   max-width: 65ch;
-  margin-bottom: 2rem;
 }
+
+.hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; }
+.hero__secondary { color: var(--text-light); font-weight: 600; }
+.hero__secondary:hover { color: var(--flame); text-decoration: none; }
 
 .hero__beginnings {
   margin-top: 5rem;
@@ -76,9 +158,31 @@
   border-top: 1px solid var(--border);
 }
 
+/* Staggered fade-up on load */
+.hero__reveal { animation: hero-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.hero__headline { animation-delay: 0.05s; }
+.hero__tagline { animation-delay: 0.15s; }
+.hero__logo { animation-delay: 0.25s; }
+.hero__status { animation-delay: 0.35s; }
+.hero__media { animation-delay: 0.45s; }
+.hero__about-text { animation-delay: 0.55s; }
+
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__reveal { animation: none; }
+}
+
 @media (max-width: 768px) {
   .hero { padding-top: calc(var(--navbar-height) + 1.5rem); }
-  .hero__header { margin-bottom: 2.5rem; }
-  .hero__about { grid-template-columns: 1fr; gap: 2rem; }
+  .hero__header { margin-bottom: 2rem; }
+  .hero__status { margin-bottom: 2.5rem; }
+  .hero__stat--progress { grid-column: auto; }
+  .hero__stat + .hero__stat { border-left: none; border-top: 1px solid var(--border); }
+  .hero__about { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero__media::before { inset: 0.75rem -0.75rem -0.75rem 0.75rem; }
   .hero__beginnings { margin-top: 3rem; }
 }

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { PortableText } from '@portabletext/react'
 import PhaseCard from '../components/PhaseCard'
 import PhaseTimeline from '../components/PhaseTimeline'
@@ -37,7 +36,6 @@ const ptComponents = {
 export default function ProjectPage() {
   const { data: settings } = useSanityFetch(queries.siteSettings)
   const { data: phases } = useSanityFetch(queries.phases)
-  const [openId, setOpenId] = useState(null)
 
   return (
     <div className="project page">
@@ -52,12 +50,7 @@ export default function ProjectPage() {
       <h2 className="section-title project__subhead">Phases</h2>
       <div className="project__phases">
         {phases?.map((phase) => (
-          <PhaseCard
-            key={phase._id}
-            phase={phase}
-            isOpen={openId === phase._id}
-            onToggle={(id) => setOpenId(openId === id ? null : id)}
-          />
+          <PhaseCard key={phase._id} phase={phase} />
         ))}
         {(!phases || phases.length === 0) && <p className="section-subtitle">Phases coming soon.</p>}
       </div>

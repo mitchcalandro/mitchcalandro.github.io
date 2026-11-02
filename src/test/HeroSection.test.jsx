@@ -6,7 +6,7 @@ import { useSanityFetch } from '../hooks/useSanityFetch'
 
 vi.mock('../hooks/useSanityFetch')
 vi.mock('../lib/sanity', () => ({
-  queries: { siteSettings: 's' },
+  queries: { siteSettings: 's', phases: 'p', members: 'm' },
   croppedImageUrl: () => '/hero.jpg',
 }))
 
@@ -32,6 +32,26 @@ describe('HeroSection', () => {
     expect(screen.getByAltText('Project Aurelian logo')).toBeInTheDocument()
     expect(screen.getByText('Students.')).toBeInTheDocument()
     expect(screen.getByText('It started in a garage.')).toBeInTheDocument()
+  })
+
+  it('shows the current phase, progress through the phases and team size', () => {
+    const data = {
+      s: { currentPhase: { _id: 'p2', name: 'Phase 2 - Testing' } },
+      p: [{ _id: 'p1' }, { _id: 'p2' }, { _id: 'p3' }, { _id: 'p4' }],
+      m: [{ _id: 'a' }, { _id: 'b' }, { _id: 'c' }],
+    }
+    useSanityFetch.mockImplementation((q) => ({ data: data[q], loading: false }))
+    render(<MemoryRouter><HeroSection /></MemoryRouter>)
+    expect(screen.getByRole('link', { name: 'Phase 2 - Testing' })).toHaveAttribute('href', '/project')
+    expect(screen.getByText('2 of 4 phases')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: '3 members' })).toHaveAttribute('href', '/members')
+    useSanityFetch.mockReset()
+  })
+
+  it('hides the status strip until there is something to show', () => {
+    useSanityFetch.mockReturnValue({ data: null, loading: true })
+    const { container } = render(<MemoryRouter><HeroSection /></MemoryRouter>)
+    expect(container.querySelector('.hero__status')).not.toBeInTheDocument()
   })
 
   it('renders headline and tagline from Sanity data', () => {

@@ -5,29 +5,71 @@ import './HeroSection.css'
 
 export default function HeroSection() {
   const { data } = useSanityFetch(queries.siteSettings)
+  const { data: phases } = useSanityFetch(queries.phases)
+  const { data: members } = useSanityFetch(queries.members)
+
+  const phaseList = Array.isArray(phases) ? phases : []
+  const phaseIndex = phaseList.findIndex((p) => p._id === data?.currentPhase?._id)
+  const teamSize = Array.isArray(members) ? members.length : 0
 
   return (
     <section id="home" className="hero">
       <div className="hero__inner section-container">
         <header className="hero__header">
-          <h1 className="hero__headline">{data?.heroHeadline || 'Project Aurelian'}</h1>
+          <div>
+            <h1 className="hero__headline hero__reveal">{data?.heroHeadline || 'Project Aurelian'}</h1>
+            <p className="hero__tagline hero__reveal">Student-built liquid rocket</p>
+          </div>
           {data?.logo && (
-            <img className="hero__logo" src={croppedImageUrl(data.logo, 320, 320)} alt="Project Aurelian logo" />
+            <img className="hero__logo hero__reveal" src={croppedImageUrl(data.logo, 320, 320)} alt="Project Aurelian logo" />
           )}
         </header>
 
+        {(phaseIndex >= 0 || teamSize > 0) && (
+          <dl className="hero__status hero__reveal">
+            {phaseIndex >= 0 && (
+              <>
+                <div className="hero__stat">
+                  <dt>Current phase</dt>
+                  <dd><Link to="/project">{data.currentPhase.name}</Link></dd>
+                </div>
+                <div className="hero__stat hero__stat--progress">
+                  <dt>Progress</dt>
+                  <dd>
+                    <span className="hero__bar" aria-hidden="true">
+                      <span style={{ width: `${((phaseIndex + 1) / phaseList.length) * 100}%` }} />
+                    </span>
+                    {phaseIndex + 1} of {phaseList.length} phases
+                  </dd>
+                </div>
+              </>
+            )}
+            {teamSize > 0 && (
+              <div className="hero__stat">
+                <dt>Team</dt>
+                <dd><Link to="/members">{teamSize} members</Link></dd>
+              </div>
+            )}
+          </dl>
+        )}
+
         <div className="hero__about">
-          <img
-            className="hero__image"
-            src={data?.heroImage ? croppedImageUrl(data.heroImage, 1000, 1000) : '/placeholder-hero.svg'}
-            alt="Project Aurelian rocket"
-          />
-          <div className="hero__about-text">
+          <div className="hero__media hero__reveal">
+            <img
+              className="hero__image"
+              src={data?.heroImage ? croppedImageUrl(data.heroImage, 1000, 1000) : '/placeholder-hero.svg'}
+              alt="Project Aurelian rocket"
+            />
+          </div>
+          <div className="hero__about-text hero__reveal">
             <h2 className="hero__subhead">Who are we?</h2>
-            <p className="hero__text">
+            <p className="hero__lead">
               {data?.whoWeAre || data?.heroTagline || 'A bi-propellant liquid rocket, built from scratch.'}
             </p>
-            <Link to="/project" className="btn-primary">Learn More</Link>
+            <div className="hero__actions">
+              <Link to="/project" className="btn-primary">Learn More</Link>
+              <Link to="/support" className="hero__secondary">Support the build →</Link>
+            </div>
           </div>
         </div>
 

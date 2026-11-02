@@ -18,34 +18,40 @@ export default function HomePage() {
     <div className="home">
       <HeroSection />
 
-      <section className="home__section section-container">
-        <h2 className="section-title">Current Focus</h2>
-        {settings?.currentPhase?.name ? (
-          <Link to="/project" className="home__current-phase">
-            {settings.currentPhase.name} →
-          </Link>
-        ) : (
-          <p className="section-subtitle">Phase details coming soon.</p>
-        )}
-        <PhaseTimeline />
-      </section>
-
-      <section className="home__section section-container">
-        <h2 className="section-title">Latest Newsletters</h2>
-        <div className="home__newsletter-grid">
-          {recent?.map((entry) => (
-            <NewsletterCard key={entry._id} entry={entry} onReadMore={setSelected} />
-          ))}
+      <section className="home__section">
+        <div className="section-container">
+          <h2 className="section-title">Current Focus</h2>
+          {settings?.currentPhase?.name ? (
+            <Link to="/project" className="home__current-phase">
+              {settings.currentPhase.name} →
+            </Link>
+          ) : (
+            <p className="section-subtitle">Phase details coming soon.</p>
+          )}
+          <PhaseTimeline />
         </div>
-        {(!recent || recent.length === 0) && (
-          <p className="section-subtitle">First newsletter coming soon.</p>
-        )}
-        <Link to="/newsletter" className="home__catch-up">Read past issues →</Link>
       </section>
 
-      <section className="home__section section-container">
-        <h2 className="section-title">Frequently Asked Questions</h2>
-        <FaqAccordion />
+      <section className="home__section">
+        <div className="section-container">
+          <h2 className="section-title">Latest Newsletters</h2>
+          <div className="home__newsletter-grid">
+            {recent?.map((entry) => (
+              <NewsletterCard key={entry._id} entry={entry} onReadMore={setSelected} />
+            ))}
+          </div>
+          {(!recent || recent.length === 0) && (
+            <p className="section-subtitle">First newsletter coming soon.</p>
+          )}
+          <Link to="/newsletter" className="home__catch-up">Read past issues →</Link>
+        </div>
+      </section>
+
+      <section className="home__section">
+        <div className="section-container">
+          <h2 className="section-title">Frequently Asked Questions</h2>
+          <FaqAccordion />
+        </div>
       </section>
 
       {selected && <NewsletterModal entry={selected} onClose={() => setSelected(null)} />}

@@ -1,6 +1,24 @@
-.phase-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color var(--transition); }
-.phase-card--open, .phase-card:hover { border-color: var(--accent); }
-.phase-card__header { width: 100%; background: none; border: none; text-align: left; padding: 1.5rem; cursor: pointer; display: flex; flex-direction: column; gap: 0.4rem; }
+.phase-card {
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: left;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: border-color var(--transition), transform var(--transition);
+}
+.phase-card:hover, .phase-card:focus-visible { border-color: var(--accent); transform: translateY(-2px); }
 .phase-card__name { font-family: var(--font-heading); font-size: 1.1rem; color: var(--text-light); }
-.phase-card__desc { font-size: 0.9rem; color: var(--text-muted); }
-.phase-card__body { padding: 0 1.5rem 1.5rem; color: var(--text-muted); line-height: 1.7; }
+.phase-card__desc { font-size: 0.9rem; color: var(--text-muted); flex-grow: 1; }
+.phase-card__more { margin-top: 0.5rem; font-size: 0.85rem; font-weight: 600; color: var(--accent-hover); }
+.phase-card:hover .phase-card__more { color: var(--flame); }
+
+.phase-modal__title { font-size: 1.75rem; margin-bottom: 0.5rem; padding-right: 2rem; }
+.phase-modal__desc { color: var(--accent-hover); margin-bottom: 1.5rem; }
+.phase-modal__body { color: rgba(248,250,252,0.85); line-height: 1.75; }
+.phase-modal__image { width: 100%; border-radius: var(--radius); margin: 1.5rem 0; }
+.phase-modal__gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; margin-top: 1.5rem; }
+.phase-modal__gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); }
