@@ -4,11 +4,14 @@
   margin-top: 2rem;
 }
 
-/* Scott + Mitchell: one full-width card each, stacked (layout inside is in MemberCard.css) */
+/* Scott + Mitchell: two big cards side by side (one per row on phones), centred if there's only one */
 .members-page__tier--leadership {
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: 3rem;
 }
+.members-page__tier--leadership > .member-card { width: calc((100% - var(--gap)) / 2); }
 
 /* Leads and members widen when there are fewer than 4, but the tiers never cross: leads
    are never wider than 3 per row (so a lead photo stays smaller than a leadership photo),
@@ -46,4 +49,7 @@
 
 @media (max-width: 1199px) { .members-page { --max-cols: 3; } }
 @media (max-width: 903px)  { .members-page { --max-cols: 2; } }
-@media (max-width: 599px)  { .members-page { --max-cols: 1; } }
+@media (max-width: 599px)  {
+  .members-page { --max-cols: 1; }
+  .members-page__tier--leadership > .member-card { width: 100%; }
+}

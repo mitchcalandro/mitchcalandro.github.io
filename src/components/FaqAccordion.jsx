@@ -27,7 +27,7 @@ export default function FaqAccordion() {
               <span className="faq__icon" aria-hidden="true">{isOpen ? '−' : '+'}</span>
             </button>
             {isOpen && (
-              <div className="faq__answer">
+              <div className="faq__answer rich-text">
                 {faq.answer?.length > 0
                   ? <PortableText value={faq.answer} />
                   : <p>Answer coming soon.</p>}

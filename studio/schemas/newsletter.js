@@ -25,7 +25,7 @@ export default {
       name: 'body',
       title: 'Full Content',
       type: 'array',
-      of: [{ type: 'block' }, { type: 'image', options: { hotspot: true } }],
+      of: [{ type: 'block' }, { type: 'image', options: { hotspot: true, modal: { type: 'dialog', width: 'auto' } } }],
       description: 'Full newsletter content. Mix text blocks and images freely.',
     },
   ],

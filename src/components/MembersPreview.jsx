@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries, croppedImageUrl } from '../lib/sanity'
+import { byTier } from '../lib/tiers'
 import './MembersPreview.css'
 
 export default function MembersPreview() {
@@ -9,7 +10,7 @@ export default function MembersPreview() {
   return (
     <div className="members-preview">
       <div className="members-preview__grid">
-        {members?.map((m) => (
+        {byTier(members || []).map((m) => (
           <div key={m._id} className="members-preview__item">
             <img
               className="members-preview__photo"

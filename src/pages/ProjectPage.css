@@ -1,3 +1,29 @@
-.project__body { color: var(--text-muted); line-height: 1.8; max-width: 800px; margin: 1rem auto 3rem; }
+.project__body { color: var(--text-muted); line-height: 1.8; font-size: 1.05rem; margin: 1.5rem 0 3rem; display: flow-root; }
 .project__subhead { margin-top: 3rem; }
 .project__phases { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+
+/* Images in the project text: floated left/right images let the text wrap beside them */
+.project__figure { margin: 0.4rem 0 1.5rem; }
+.project__figure img { width: 100%; border-radius: var(--radius); border: 1px solid var(--border); }
+.project__figure figcaption { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; text-align: center; font-style: italic; }
+.project__figure--left { float: left; margin-right: 2rem; }
+.project__figure--right { float: right; margin-left: 2rem; }
+/* a new left/right image starts below any earlier one, so text never gets squeezed between two */
+.project__figure--left, .project__figure--right { clear: both; }
+.project__figure--center { margin-left: auto; margin-right: auto; clear: both; }
+.project__figure--full { clear: both; }
+.project__figure--small { width: 33%; }
+.project__figure--medium { width: 50%; }
+.project__figure--large { width: 66%; }
+
+.project__columns { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 3rem; clear: both; margin: 1.5rem 0 2rem; }
+.project__columns > div { display: flow-root; }
+
+/* Too narrow for text beside an image, so every image gets its own full-width row */
+@media (max-width: 700px) {
+  .project__figure { float: none; width: 100%; margin-left: 0; margin-right: 0; }
+}
+
+@media (max-width: 900px) {
+  .project__columns { grid-template-columns: 1fr; gap: 1.75rem; }
+}

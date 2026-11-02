@@ -7,7 +7,7 @@ import { useSanityFetch } from '../hooks/useSanityFetch'
 vi.mock('../hooks/useSanityFetch')
 vi.mock('../lib/sanity', () => ({
   queries: { siteSettings: 's' },
-  urlFor: () => ({ width: () => ({ url: () => '/hero.jpg' }) }),
+  croppedImageUrl: () => '/hero.jpg',
 }))
 
 describe('HeroSection', () => {
@@ -15,6 +15,23 @@ describe('HeroSection', () => {
     useSanityFetch.mockReturnValue({ data: null, loading: true })
     render(<MemoryRouter><HeroSection /></MemoryRouter>)
     expect(document.getElementById('home')).toBeInTheDocument()
+  })
+
+  it('shows the logo and Our beginnings only once they are filled in', () => {
+    useSanityFetch.mockReturnValue({ data: null, loading: true })
+    const { unmount } = render(<MemoryRouter><HeroSection /></MemoryRouter>)
+    expect(screen.queryByAltText('Project Aurelian logo')).not.toBeInTheDocument()
+    expect(screen.queryByText('Our beginnings')).not.toBeInTheDocument()
+    unmount()
+
+    useSanityFetch.mockReturnValue({
+      data: { logo: { asset: { _ref: 'image-2' } }, whoWeAre: 'Students.', ourBeginnings: 'It started in a garage.' },
+      loading: false,
+    })
+    render(<MemoryRouter><HeroSection /></MemoryRouter>)
+    expect(screen.getByAltText('Project Aurelian logo')).toBeInTheDocument()
+    expect(screen.getByText('Students.')).toBeInTheDocument()
+    expect(screen.getByText('It started in a garage.')).toBeInTheDocument()
   })
 
   it('renders headline and tagline from Sanity data', () => {

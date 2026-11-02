@@ -14,4 +14,17 @@ describe('MembersPreview', () => {
     expect(screen.getByText('Scott Meeson')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /see more/i })).toHaveAttribute('href', '/members')
   })
+
+  it('lists leadership first, then leads, then members, keeping display order within a tier', () => {
+    useSanityFetch.mockReturnValue({ data: [
+      { _id: 'a', name: 'Member One', tier: 3 },
+      { _id: 'b', name: 'Lead One', tier: 2 },
+      { _id: 'c', name: 'Boss One', tier: 1 },
+      { _id: 'd', name: 'Member Two', tier: 'member' },
+      { _id: 'e', name: 'Boss Two', tier: 'leadership' },
+    ], loading: false })
+    render(<MemoryRouter><MembersPreview /></MemoryRouter>)
+    const names = screen.getAllByRole('img').map((img) => img.alt)
+    expect(names).toEqual(['Boss One', 'Boss Two', 'Lead One', 'Member One', 'Member Two'])
+  })
 })

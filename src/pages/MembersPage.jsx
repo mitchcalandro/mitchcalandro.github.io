@@ -1,16 +1,8 @@
 import MemberCard from '../components/MemberCard'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries } from '../lib/sanity'
+import { TIERS, tierOf } from '../lib/tiers'
 import './MembersPage.css'
-
-const TIERS = ['leadership', 'lead', 'member']
-
-// Tier is stored as a number (1 = leadership, 2 = lead, 3 = member) so the Studio can sort
-// members by role. Older entries stored the tier name, so both are accepted.
-function tierOf(member) {
-  if (typeof member.tier === 'number') return TIERS[member.tier - 1] || 'member'
-  return TIERS.includes(member.tier) ? member.tier : 'member'
-}
 
 export default function MembersPage() {
   const { data: members } = useSanityFetch(queries.members)

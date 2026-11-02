@@ -9,7 +9,7 @@ export default function PhaseCard({ phase, isOpen, onToggle }) {
         {phase.shortDescription && <span className="phase-card__desc">{phase.shortDescription}</span>}
       </button>
       {isOpen && (
-        <div className="phase-card__body">
+        <div className="phase-card__body rich-text">
           {phase.body?.length > 0 ? <PortableText value={phase.body} /> : <p>Details coming soon.</p>}
         </div>
       )}

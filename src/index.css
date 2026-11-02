@@ -12,7 +12,7 @@
   --font-body: 'Inter', sans-serif;
   --navbar-height: 72px;
   --section-padding: 6rem 2rem;
-  --max-width: 1200px;
+  --max-width: 1440px;
   --radius: 8px;
   --transition: 0.2s ease;
   --card-bg: #161f35;
@@ -88,6 +88,16 @@ section:nth-of-type(even) {
   margin-bottom: 3rem;
   max-width: 600px;
 }
+
+/* Text written in the Studio: each Enter makes a new paragraph, Shift+Enter a line break inside one */
+.rich-text :is(p, li) { white-space: pre-line; }
+.rich-text :is(p, ul, ol, blockquote) { margin-bottom: 1em; }
+.rich-text :is(ul, ol) { padding-left: 1.5em; }
+.rich-text :is(h1, h2, h3, h4, h5, h6) { color: var(--text-light); margin: 1.75em 0 0.5em; }
+.rich-text h4 { font-size: 1.1em; }
+.rich-text blockquote { border-left: 3px solid var(--accent); padding-left: 1em; font-style: italic; }
+.rich-text > :first-child { margin-top: 0; }
+.rich-text > :last-child { margin-bottom: 0; }
 
 .btn-primary {
   display: inline-block;
