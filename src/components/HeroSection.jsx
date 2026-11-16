@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries, croppedImageUrl } from '../lib/sanity'
+import RichText from './RichText'
 import './HeroSection.css'
 
 export default function HeroSection() {
@@ -18,7 +19,7 @@ export default function HeroSection() {
         <header className="hero__header">
           <div>
             <h1 className="hero__headline hero__reveal">{data?.heroHeadline || 'Project Aurelian'}</h1>
-            <p className="hero__tagline hero__reveal">Student-built liquid rocket</p>
+            <p className="hero__tagline hero__reveal"><RichText inline value={data?.heroTagline || 'Student-Led Liquid Rocketry'} /></p>
           </div>
           {data?.logo && (
             <img className="hero__logo hero__reveal" src={croppedImageUrl(data.logo, 320, 320)} alt="Project Aurelian logo" />
@@ -63,9 +64,9 @@ export default function HeroSection() {
           </div>
           <div className="hero__about-text hero__reveal">
             <h2 className="hero__subhead">Who are we?</h2>
-            <p className="hero__lead">
-              {data?.whoWeAre || data?.heroTagline || 'A bi-propellant liquid rocket, built from scratch.'}
-            </p>
+            <div className="hero__lead rich-text">
+              <RichText value={data?.whoWeAre || 'A bi-propellant liquid rocket, built from scratch.'} />
+            </div>
             <div className="hero__actions">
               <Link to="/project" className="btn-primary">Learn More</Link>
               <Link to="/support" className="hero__secondary">Support the build →</Link>
@@ -76,7 +77,7 @@ export default function HeroSection() {
         {data?.ourBeginnings && (
           <div className="hero__beginnings">
             <h2 className="hero__subhead">Our beginnings</h2>
-            <p className="hero__text">{data.ourBeginnings}</p>
+            <div className="hero__text rich-text"><RichText value={data.ourBeginnings} /></div>
           </div>
         )}
       </div>

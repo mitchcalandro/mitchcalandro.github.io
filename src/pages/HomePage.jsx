@@ -47,7 +47,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="home__section">
+      <section className="home__section home__faq">
         <div className="section-container">
           <h2 className="section-title">Frequently Asked Questions</h2>
           <FaqAccordion />

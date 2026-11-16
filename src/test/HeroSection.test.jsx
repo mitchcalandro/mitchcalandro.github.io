@@ -61,7 +61,7 @@ describe('HeroSection', () => {
     })
     render(<MemoryRouter><HeroSection /></MemoryRouter>)
     expect(screen.getByText('We Build Rockets')).toBeInTheDocument()
-    expect(screen.getByText('A student rocket project.')).toBeInTheDocument()
+    expect(screen.getByText('A student rocket project.')).toHaveClass('hero__tagline')
   })
 
   it('uses the Sanity hero image when one is uploaded', () => {

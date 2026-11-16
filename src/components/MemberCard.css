@@ -19,7 +19,7 @@
 .member-card__photo {
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: var(--radius);
   border: 1px solid var(--border);
@@ -68,7 +68,6 @@
 
 /* Tier sizing — the size difference is what signals hierarchy */
 .member-card--leadership { padding: 1.5rem; gap: 1rem; }
-.member-card--leadership .member-card__photo { aspect-ratio: 5 / 4; }
 .member-card--leadership .member-card__name { font-size: 1.4rem; }
 .member-card--leadership .member-card__role { font-size: 1rem; }
 .member-card--leadership .member-card__link { font-size: 0.95rem; }

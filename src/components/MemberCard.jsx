@@ -1,16 +1,17 @@
 import { useState } from 'react'
 import { PortableText } from '@portabletext/react'
 import Modal from './Modal'
+import RichText from './RichText'
 import { croppedImageUrl } from '../lib/sanity'
 import './MemberCard.css'
 
-// Leadership photos are 5:4, lead and member photos are 4:3 (see MemberCard.css).
-// Sizes are roughly twice the on-screen size so photos stay sharp on high-DPI screens.
-// Leadership cards sit two to a row (about 590px), leads up to about 460px, members 390px.
+// Photos are 4:5 portraits in every tier, matching how headshots are cropped in the Studio,
+// so the whole headshot shows (see MemberCard.css). Sizes are roughly twice the on-screen
+// size so photos stay sharp on high-DPI screens.
 const PHOTO_SIZES = {
-  leadership: [1200, 960],
-  lead: [880, 660],
-  member: [720, 540],
+  leadership: [960, 1200],
+  lead: [720, 900],
+  member: [640, 800],
 }
 
 function AboutMe({ member, onClose }) {
@@ -22,7 +23,7 @@ function AboutMe({ member, onClose }) {
         {member.bio && (
           <div className="member-about__block">
             <h4 className="member-card__label">About Me</h4>
-            <p>{member.bio}</p>
+            <div className="rich-text"><RichText value={member.bio} /></div>
           </div>
         )}
         {member.contributions?.length > 0 && (
@@ -61,13 +62,10 @@ export default function MemberCard({ member, tier = 'member' }) {
 
       <div className="member-card__links">
         {member.resumeUrl && (
-          <a href={member.resumeUrl} target="_blank" rel="noopener noreferrer" className="member-card__link">Resume ↗</a>
+          <a href={member.resumeUrl} target="_blank" rel="noopener noreferrer" className="member-card__link">LinkedIn ↗</a>
         )}
         {member.portfolioUrl && (
           <a href={member.portfolioUrl} target="_blank" rel="noopener noreferrer" className="member-card__link">Portfolio ↗</a>
-        )}
-        {member.linkedInUrl && (
-          <a href={member.linkedInUrl} target="_blank" rel="noopener noreferrer" className="member-card__link">LinkedIn</a>
         )}
         {member.githubUrl && (
           <a href={member.githubUrl} target="_blank" rel="noopener noreferrer" className="member-card__link">GitHub</a>

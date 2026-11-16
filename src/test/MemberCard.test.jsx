@@ -9,7 +9,7 @@ const member = {
   name: 'Scott Meeson', role: 'Lead Engineer', photo: null,
   bio: 'Bio text', contributions: [{ _type: 'block', _key: 'c', children: [{ _type: 'span', text: 'Built engine.' }] }],
   futureAspirations: [{ _type: 'block', _key: 'f', children: [{ _type: 'span', text: 'Go to space.' }] }],
-  resumeUrl: 'https://x.com/r.pdf', portfolioUrl: 'https://x.com/folio', linkedInUrl: 'https://linkedin.com/in/x',
+  resumeUrl: 'https://linkedin.com/in/x', portfolioUrl: 'https://x.com/folio',
   githubUrl: 'https://github.com/x', email: 'scott@example.com',
 }
 
@@ -18,9 +18,8 @@ describe('MemberCard', () => {
     render(<MemberCard member={member} />)
     expect(screen.getByText('Scott Meeson')).toBeInTheDocument()
     expect(screen.getByText('Lead Engineer')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /resume/i })).toHaveAttribute('href', 'https://x.com/r.pdf')
+    expect(screen.getByRole('link', { name: /linkedin/i })).toHaveAttribute('href', 'https://linkedin.com/in/x')
     expect(screen.getByRole('link', { name: /portfolio/i })).toHaveAttribute('href', 'https://x.com/folio')
-    expect(screen.getByRole('link', { name: /linkedin/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /github/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /email/i })).toHaveAttribute('href', 'mailto:scott@example.com')
     expect(screen.queryByText('Bio text')).not.toBeInTheDocument()
@@ -42,7 +41,7 @@ describe('MemberCard', () => {
 
   it('omits links that are not provided', () => {
     render(<MemberCard member={{ name: 'X', role: 'Y', photo: null }} />)
-    expect(screen.queryByRole('link', { name: /resume/i })).not.toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /linkedin/i })).not.toBeInTheDocument()
     expect(screen.queryByRole('link', { name: /portfolio/i })).not.toBeInTheDocument()
     expect(screen.queryByRole('link', { name: /github/i })).not.toBeInTheDocument()
   })
@@ -50,8 +49,8 @@ describe('MemberCard', () => {
   it('requests the photo in the exact shape of its tier box so the Studio crop is honoured', () => {
     const photo = { asset: { _ref: 'image-a' }, crop: { top: 0.1 }, hotspot: { x: 0.5, y: 0.3 } }
     render(<MemberCard member={{ name: 'L', role: 'R', photo }} tier="leadership" />)
-    expect(croppedImageUrl).toHaveBeenLastCalledWith(photo, 1200, 960)
+    expect(croppedImageUrl).toHaveBeenLastCalledWith(photo, 960, 1200)
     render(<MemberCard member={{ name: 'M', role: 'R', photo }} tier="member" />)
-    expect(croppedImageUrl).toHaveBeenLastCalledWith(photo, 720, 540)
+    expect(croppedImageUrl).toHaveBeenLastCalledWith(photo, 640, 800)
   })
 })

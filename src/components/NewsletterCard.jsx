@@ -1,3 +1,4 @@
+import RichText from './RichText'
 import './NewsletterCard.css'
 
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
@@ -9,7 +10,7 @@ export default function NewsletterCard({ entry, onReadMore, featured = false }) 
         {MONTHS[(entry.month ?? 1) - 1]} {entry.year}
       </p>
       <h3 className="newsletter-card__title">{entry.title}</h3>
-      <p className="newsletter-card__preview">{entry.preview}</p>
+      <div className="newsletter-card__preview rich-text"><RichText value={entry.preview} /></div>
       <button className="btn-primary newsletter-card__read-more" onClick={() => onReadMore(entry)}>
         Read More →
       </button>

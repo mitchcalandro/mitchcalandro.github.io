@@ -14,7 +14,7 @@ export default function MembersPreview() {
           <div key={m._id} className="members-preview__item">
             <img
               className="members-preview__photo"
-              src={m.photo ? croppedImageUrl(m.photo, 200, 200) : '/placeholder-photo.svg'}
+              src={m.photo ? croppedImageUrl(m.photo, 200, 250) : '/placeholder-photo.svg'}
               alt={m.name}
             />
             <span className="members-preview__name">{m.name}</span>

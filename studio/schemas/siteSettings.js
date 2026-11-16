@@ -1,3 +1,5 @@
+import { formattedLine } from './formattedLine'
+
 // An image in the project text, with where it sits and how big it is
 const projectImage = {
   type: 'image',
@@ -54,9 +56,8 @@ export default {
     {
       name: 'heroTagline',
       title: 'Hero Tagline',
-      type: 'text',
-      rows: 3,
-      description: '2–3 sentence tagline shown under the headline',
+      ...formattedLine,
+      description: 'Short line shown under the big title on the Home page, e.g. "Student-Led Liquid Rocketry"',
     },
     {
       name: 'heroImage',
@@ -75,15 +76,15 @@ export default {
     {
       name: 'whoWeAre',
       title: 'Who are we?',
-      type: 'text',
-      rows: 6,
-      description: 'Shown beside the photo on the Home page. Leave a blank line between paragraphs. If empty, the Hero Tagline is used.',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description: 'Shown beside the photo on the Home page',
     },
     {
       name: 'ourBeginnings',
       title: 'Our beginnings',
-      type: 'text',
-      rows: 8,
+      type: 'array',
+      of: [{ type: 'block' }],
       description: 'How the team started, shown under the photo on the Home page. Leave empty to hide the section.',
     },
     {

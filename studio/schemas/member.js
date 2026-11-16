@@ -10,9 +10,9 @@ export default {
       title: 'Photo',
       type: 'image',
       options: { hotspot: true },
-      description: 'After uploading, click the crop icon on the photo to choose the framing: drag the box to crop, and drag the circle onto the face so it stays centred. Photos show as a 4:3 rectangle (a bit wider than tall), except Leadership, which is 5:4 (a little closer to square). Upload at least 1000px wide so it stays sharp. Member photos never appear in the Gallery.',
+      description: 'After uploading, click the crop icon on the photo to choose the framing: drag the box to crop, and drag the circle onto the face so it stays centred. Photos show as a 4:5 portrait (a bit taller than wide), so crop to the head and shoulders in roughly that shape. Upload at least 1000px wide so it stays sharp. Member photos never appear in the Gallery.',
     },
-    { name: 'bio', title: 'About Me', type: 'text', rows: 4, description: 'Short paragraph for potential employers' },
+    { name: 'bio', title: 'About Me', type: 'array', of: [{ type: 'block' }], description: 'Short paragraph for potential employers' },
     {
       name: 'tier',
       title: 'Tier',
@@ -32,7 +32,8 @@ export default {
     { name: 'order', title: 'Display Order', type: 'number', description: 'Lower number = appears first within a tier' },
     { name: 'contributions', title: 'Contributions', type: 'array', of: [{ type: 'block' }] },
     { name: 'futureAspirations', title: 'Future Aspirations', type: 'array', of: [{ type: 'block' }] },
-    { name: 'resumeUrl', title: 'Resume URL', type: 'url', description: 'Link to resume (Google Drive, LinkedIn, PDF, etc.)' },
+    // Named resumeUrl from before it was relabelled; renaming it would orphan the saved links
+    { name: 'resumeUrl', title: 'LinkedIn URL', type: 'url', description: 'Link to their LinkedIn profile. Shows as the LinkedIn button.' },
     { name: 'portfolioUrl', title: 'Portfolio URL', type: 'url', description: 'Link to a personal portfolio or website. Leave empty to hide the button.' },
     { name: 'githubUrl', title: 'GitHub URL', type: 'url' },
   ],

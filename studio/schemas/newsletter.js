@@ -17,8 +17,8 @@ export default {
     {
       name: 'preview',
       title: 'Preview Text',
-      type: 'text',
-      rows: 2,
+      type: 'array',
+      of: [{ type: 'block' }],
       description: '1–2 sentences shown on the card before clicking Read More',
     },
     {

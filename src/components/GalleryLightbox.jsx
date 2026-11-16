@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { fullImageUrl } from '../lib/sanity'
 import { captionFor } from '../lib/gallery'
+import RichText from './RichText'
 import './GalleryLightbox.css'
 
 function SourceAction({ source, onOpenNewsletter }) {
@@ -75,7 +76,7 @@ export default function GalleryLightbox({ entries, index, onClose, onNavigate, o
           <div key={s.key} className="gallery-lightbox__source">
             <p className="gallery-lightbox__label">{s.label}</p>
             {s.title && <h2 className="gallery-lightbox__title">{s.title}</h2>}
-            {s.text && <p className="gallery-lightbox__text">{s.text}</p>}
+            {s.text && <div className="gallery-lightbox__text rich-text"><RichText value={s.text} /></div>}
             <SourceAction source={s} onOpenNewsletter={onOpenNewsletter} />
           </div>
         ))}
