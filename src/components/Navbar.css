@@ -26,7 +26,7 @@
   gap: 0.75rem;
 }
 
-.navbar__mark { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+.navbar__mark { width: 36px; height: 36px; object-fit: contain; }
 
 .navbar__links {
   display: flex;

@@ -24,6 +24,11 @@ export function fullImageUrl(image, width) {
   return builder.image(image).width(width).fit('max').auto('format').url()
 }
 
+// The logo is an SVG, and Sanity ignores the Studio crop on SVGs unless they're turned into PNGs
+export function logoUrl(image, width) {
+  return builder.image(image).width(width).fit('max').format('png').url()
+}
+
 const IMAGE_ASSET = '"asset": asset->{ _id, url, metadata { dimensions } }'
 
 export const queries = {

@@ -39,12 +39,25 @@
   margin-top: 1.25rem;
 }
 
+/* The logo spans from just under the top line to just above the status strip, centred in
+   the space beside the title, without making the header any taller */
+.hero__logo-slot { position: relative; align-self: stretch; }
 .hero__logo {
-  justify-self: center;
-  width: clamp(100px, 24vw, 310px);
+  position: absolute;
+  /* from 1.25rem into the header's top padding to 2rem into its bottom margin (2rem on small screens) */
+  top: -1.25rem;
+  height: calc(100% + 3.25rem);
+  left: 0;
+  right: 0;
+  margin: auto;
   aspect-ratio: 1;
-  border-radius: 50%;
-  object-fit: cover;
+  object-fit: contain;
+}
+
+/* No room beside the title on phones: a small logo in the normal flow */
+@media (max-width: 600px) {
+  .hero__logo-slot { align-self: center; }
+  .hero__logo { position: static; width: clamp(70px, 22vw, 110px); }
 }
 
 /* Live project status: current phase, progress through the phases, team size */

@@ -8,6 +8,7 @@ vi.mock('../hooks/useSanityFetch')
 vi.mock('../lib/sanity', () => ({
   queries: { siteSettings: 's', phases: 'p', members: 'm' },
   croppedImageUrl: () => '/hero.jpg',
+  logoUrl: () => '/logo.png',
 }))
 
 describe('HeroSection', () => {

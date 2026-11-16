@@ -71,7 +71,7 @@ export default {
       title: 'Logo',
       type: 'image',
       options: { hotspot: true },
-      description: 'Small round logo beside the big title on the Home page. Leave empty to hide it.',
+      description: 'Shown beside the big title on the Home page and small in the top bar. Use the crop tool to trim it close around the artwork; any empty space around it makes it look smaller. Leave empty to hide it.',
     },
     {
       name: 'whoWeAre',

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useSanityFetch } from '../hooks/useSanityFetch'
-import { queries, croppedImageUrl } from '../lib/sanity'
+import { queries, croppedImageUrl, logoUrl } from '../lib/sanity'
 import RichText from './RichText'
 import './HeroSection.css'
 
@@ -22,7 +22,9 @@ export default function HeroSection() {
             <p className="hero__tagline hero__reveal"><RichText inline value={data?.heroTagline || 'Student-Led Liquid Rocketry'} /></p>
           </div>
           {data?.logo && (
-            <img className="hero__logo hero__reveal" src={croppedImageUrl(data.logo, 620, 620)} alt="Project Aurelian logo" />
+            <div className="hero__logo-slot">
+              <img className="hero__logo hero__reveal" src={logoUrl(data.logo, 800)} alt="Project Aurelian logo" />
+            </div>
           )}
         </header>
 

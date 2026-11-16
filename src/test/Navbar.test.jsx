@@ -4,7 +4,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 
 vi.mock('../hooks/useSanityFetch', () => ({ useSanityFetch: vi.fn(() => ({ data: null })) }))
-vi.mock('../lib/sanity', () => ({ queries: { siteSettings: 's' }, croppedImageUrl: () => '/logo.png' }))
+vi.mock('../lib/sanity', () => ({ queries: { siteSettings: 's' }, logoUrl: () => '/logo.png' }))
 import Navbar from '../components/Navbar'
 
 const renderNav = (path = '/') =>
