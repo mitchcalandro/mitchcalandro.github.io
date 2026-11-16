@@ -7,7 +7,7 @@
     },
     "studio": {
       "root": "studio",
-      "framework": "sanity-v3"
+      "framework": "sanity"
     }
   },
   "rewrites": [
