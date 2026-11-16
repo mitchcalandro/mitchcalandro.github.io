@@ -21,7 +21,12 @@
   letter-spacing: 0.15em;
   color: var(--text-light);
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
 }
+
+.navbar__mark { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
 
 .navbar__links {
   display: flex;

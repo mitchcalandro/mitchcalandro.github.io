@@ -1,6 +1,10 @@
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
+import { useSanityFetch } from '../hooks/useSanityFetch'
+
+vi.mock('../hooks/useSanityFetch', () => ({ useSanityFetch: vi.fn(() => ({ data: null })) }))
+vi.mock('../lib/sanity', () => ({ queries: { siteSettings: 's' }, croppedImageUrl: () => '/logo.png' }))
 import Navbar from '../components/Navbar'
 
 const renderNav = (path = '/') =>
@@ -10,6 +14,14 @@ describe('Navbar', () => {
   it('renders the logo text', () => {
     renderNav()
     expect(screen.getByText('PROJECT AURELIAN')).toBeInTheDocument()
+  })
+
+  it('shows the Sanity logo beside the name only when one is uploaded', () => {
+    const { container, unmount } = renderNav()
+    expect(container.querySelector('.navbar__mark')).not.toBeInTheDocument()
+    unmount()
+    useSanityFetch.mockReturnValue({ data: { logo: { asset: { _ref: 'image-l' } } } })
+    expect(renderNav().container.querySelector('.navbar__mark')).toHaveAttribute('src', '/logo.png')
   })
 
   it('renders all nav links with correct hrefs', () => {

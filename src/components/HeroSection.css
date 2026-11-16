@@ -7,10 +7,11 @@
 .hero__inner { position: relative; }
 
 /* Big title on the left, small round logo on the right, with a rule above like a page masthead */
+/* Title on the left; the logo sits centred in the space to its right */
 .hero__header {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: 2rem;
   padding-top: 1.5rem;
   border-top: 2px solid var(--accent);
@@ -39,7 +40,8 @@
 }
 
 .hero__logo {
-  width: clamp(90px, 14vw, 160px);
+  justify-self: center;
+  width: clamp(90px, 20vw, 260px);
   aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;

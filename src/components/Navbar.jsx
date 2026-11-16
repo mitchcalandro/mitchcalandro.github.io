@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { useSanityFetch } from '../hooks/useSanityFetch'
+import { queries, croppedImageUrl } from '../lib/sanity'
 import './Navbar.css'
 
 const NAV_ITEMS = [
@@ -14,10 +16,12 @@ const NAV_ITEMS = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { data } = useSanityFetch(queries.siteSettings)
 
   return (
     <nav className="navbar">
       <Link to="/" className="navbar__logo" onClick={() => setMenuOpen(false)}>
+        {data?.logo && <img className="navbar__mark" src={croppedImageUrl(data.logo, 72, 72)} alt="" />}
         PROJECT AURELIAN
       </Link>
 
