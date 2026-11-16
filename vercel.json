@@ -1,0 +1,27 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "app": {
+      "root": ".",
+      "framework": "vite"
+    },
+    "studio": {
+      "root": "studio",
+      "framework": "sanity-v3"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/studio",
+      "destination": { "service": "studio" }
+    },
+    {
+      "source": "/studio/(.*)",
+      "destination": { "service": "studio" }
+    },
+    {
+      "source": "/(.*)",
+      "destination": { "service": "app" }
+    }
+  ]
+}
