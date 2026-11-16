@@ -22,7 +22,7 @@ export default function HeroSection() {
             <p className="hero__tagline hero__reveal"><RichText inline value={data?.heroTagline || 'Student-Led Liquid Rocketry'} /></p>
           </div>
           {data?.logo && (
-            <img className="hero__logo hero__reveal" src={croppedImageUrl(data.logo, 520, 520)} alt="Project Aurelian logo" />
+            <img className="hero__logo hero__reveal" src={croppedImageUrl(data.logo, 620, 620)} alt="Project Aurelian logo" />
           )}
         </header>
 
