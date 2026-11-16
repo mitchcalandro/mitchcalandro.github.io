@@ -10,7 +10,6 @@ export default defineConfig({
   projectId: '59rhnpdt',
   dataset: 'production',
   // Served under /studio when deployed as a Vercel service alongside the site
-  basePath: '/studio',
   plugins: [structureTool({ structure }), visionTool()],
   schema: {
     types: schemaTypes,
