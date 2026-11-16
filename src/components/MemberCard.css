@@ -25,13 +25,11 @@
   border: 1px solid var(--border);
 }
 
-/* Name on the left, role on the right; the role drops under the name when the card is narrow */
+/* Role always sits under the name */
 .member-card__heading {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.25rem 0.75rem;
+  flex-direction: column;
+  gap: 0.25rem;
   padding-bottom: 0.6rem;
   border-bottom: 1px solid var(--border);
 }
