@@ -170,16 +170,23 @@
   border-top: 1px solid var(--border);
 }
 
+/* Heading on top, photo beside the paragraph and exactly as tall as it */
 .hero__beginnings--photo {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  gap: 4rem;
-  align-items: center;
+  grid-template-areas: 'head head' 'text media';
+  column-gap: 4rem;
 }
+.hero__beginnings--photo .hero__subhead { grid-area: head; }
+.hero__beginnings--photo .hero__text { grid-area: text; }
 
+/* The image is taken out of the flow so the text alone sets the row height */
+.hero__beginnings-media { grid-area: media; position: relative; min-height: 18rem; }
 .hero__beginnings-image {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 100%;
   object-fit: cover;
   border-radius: calc(var(--radius) * 2);
   border: 1px solid var(--border);
@@ -213,5 +220,6 @@
   .hero__about { grid-template-columns: 1fr; gap: 2.5rem; }
   .hero__media::before { inset: 0.75rem -0.75rem -0.75rem 0.75rem; }
   .hero__beginnings { margin-top: 3rem; }
-  .hero__beginnings--photo { grid-template-columns: 1fr; gap: 2rem; }
+  .hero__beginnings--photo { grid-template-columns: 1fr; grid-template-areas: 'head' 'text' 'media'; }
+  .hero__beginnings-media { min-height: 0; aspect-ratio: 4 / 3; margin-top: 2rem; }
 }
