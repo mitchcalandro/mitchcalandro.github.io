@@ -1,4 +1,4 @@
-import { PortableText } from '@portabletext/react'
+import { PortableText } from '../lib/portableText'
 import DonateBox from '../components/DonateBox'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries } from '../lib/sanity'

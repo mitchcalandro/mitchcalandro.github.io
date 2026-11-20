@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { PortableText } from '@portabletext/react'
+import { PortableText } from '../lib/portableText'
 import Modal from './Modal'
 import RichText from './RichText'
 import { fullImageUrl } from '../lib/sanity'

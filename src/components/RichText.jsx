@@ -1,4 +1,4 @@
-import { PortableText } from '@portabletext/react'
+import { PortableText } from '../lib/portableText'
 
 // One-line fields (taglines, phase descriptions) sit inside an existing line, so their
 // paragraphs are joined instead of each getting its own <p>

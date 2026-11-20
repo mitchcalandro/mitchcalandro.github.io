@@ -1,4 +1,4 @@
-import { PortableText } from '@portabletext/react'
+import { PortableText } from '../lib/portableText'
 import Modal from './Modal'
 import { fullImageUrl } from '../lib/sanity'
 import './NewsletterModal.css'

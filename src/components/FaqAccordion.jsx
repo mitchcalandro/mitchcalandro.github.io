@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { PortableText } from '@portabletext/react'
+import { PortableText } from '../lib/portableText'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries } from '../lib/sanity'
 import './FaqAccordion.css'

@@ -1,4 +1,4 @@
-import { PortableText } from '@portabletext/react'
+import { PortableText } from '../lib/portableText'
 import PhaseCard from '../components/PhaseCard'
 import PhaseTimeline from '../components/PhaseTimeline'
 import MembersPreview from '../components/MembersPreview'
