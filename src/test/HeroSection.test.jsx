@@ -33,6 +33,16 @@ describe('HeroSection', () => {
     expect(screen.getByAltText('Project Aurelian logo')).toBeInTheDocument()
     expect(screen.getByText('Students.')).toBeInTheDocument()
     expect(screen.getByText('It started in a garage.')).toBeInTheDocument()
+    expect(screen.queryByAltText('Founding photo')).not.toBeInTheDocument()
+  })
+
+  it('shows the Our beginnings photo beside the text when one is set', () => {
+    useSanityFetch.mockReturnValue({
+      data: { ourBeginnings: 'It started in a garage.', beginningsImage: { asset: { _ref: 'image-3' }, alt: 'Founding photo' } },
+      loading: false,
+    })
+    render(<MemoryRouter><HeroSection /></MemoryRouter>)
+    expect(screen.getByAltText('Founding photo')).toHaveAttribute('src', '/hero.jpg')
   })
 
   it('shows the current phase, progress through the phases and team size', () => {

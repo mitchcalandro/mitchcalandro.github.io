@@ -88,10 +88,24 @@ export default {
       description: 'How the team started, shown under the photo on the Home page. Leave empty to hide the section.',
     },
     {
+      name: 'beginningsImage',
+      title: 'Our beginnings photo',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [{ name: 'alt', title: 'Alt text', type: 'string', description: 'Describe the photo for screen readers' }],
+      description: 'Shown to the right of "Our beginnings". It shows as a 4:3 landscape, so use the hotspot to keep the important part in frame. Leave empty to show the text alone.',
+    },
+    {
       name: 'goFundMeUrl',
       title: 'GoFundMe URL',
       type: 'url',
       description: 'Link for the Donate button — update when GoFundMe is live',
+    },
+    {
+      name: 'interestFormUrl',
+      title: 'Interest Form URL',
+      type: 'url',
+      description: 'Link for people who want to join the project, shown as a box on the Contact page. Leave blank to use the Google Form built into the site.',
     },
     {
       name: 'projectBody',

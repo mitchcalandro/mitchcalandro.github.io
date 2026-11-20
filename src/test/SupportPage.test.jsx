@@ -15,10 +15,10 @@ describe('SupportPage', () => {
       .toHaveAttribute('href', 'https://gofundme.com/f/aurelian')
   })
 
-  it('falls back to the GoFundMe site so the button is never dead', () => {
+  it('falls back to the team GoFundMe so the button is never dead', () => {
     useSanityFetch.mockReturnValue({ data: { body: [], goFundMeUrl: null }, loading: false })
     render(<SupportPage />)
     expect(screen.getByRole('link', { name: /donate/i }))
-      .toHaveAttribute('href', 'https://www.gofundme.com')
+      .toHaveAttribute('href', 'https://www.gofundme.com/f/support-project-aurelian')
   })
 })

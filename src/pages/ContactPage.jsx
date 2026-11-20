@@ -4,12 +4,14 @@ import { queries } from '../lib/sanity'
 import './ContactPage.css'
 
 const DEFAULT_FORMSPREE_ID = 'xyeeeykj'
+const DEFAULT_INTEREST_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeNYlfGoilZ84iwix8XHPKpOEx4wCDnNUYF4QbcLw5ZEuc-DA/viewform'
 
 export default function ContactPage() {
   const { data: settings } = useSanityFetch(queries.siteSettings)
   const { data: contacts } = useSanityFetch(queries.contact)
 
   const formspreeId = settings?.formspreeId || DEFAULT_FORMSPREE_ID
+  const interestFormUrl = settings?.interestFormUrl || DEFAULT_INTEREST_FORM_URL
 
   return (
     <div className="contact-page page">
@@ -19,6 +21,14 @@ export default function ContactPage() {
       </p>
 
       <ContactForm formspreeId={formspreeId} />
+
+      <aside className="contact-page__interest">
+        <div>
+          <h2 className="contact-page__interest-title">Want to work on the project?</h2>
+          <p>Fill out our interest form and we'll be in touch.</p>
+        </div>
+        <a className="btn-primary" href={interestFormUrl} target="_blank" rel="noopener noreferrer">Interest form ↗</a>
+      </aside>
 
       {(!contacts || contacts.length === 0) && (
         <p className="section-subtitle">Contact details coming soon.</p>

@@ -41,6 +41,16 @@ describe('ContactPage', () => {
     expect(screen.getByTestId('contact-form')).toHaveAttribute('data-form-id', 'override1')
   })
 
+  it('links the interest form box to the built-in Google Form unless Sanity has another link', () => {
+    mockFetch(null)
+    const { unmount } = render(<ContactPage />)
+    expect(screen.getByRole('link', { name: /interest form/i })).toHaveAttribute('href', expect.stringContaining('docs.google.com/forms'))
+    unmount()
+    mockFetch({ interestFormUrl: 'https://forms.example.com/join' })
+    render(<ContactPage />)
+    expect(screen.getByRole('link', { name: /interest form/i })).toHaveAttribute('href', 'https://forms.example.com/join')
+  })
+
   it('shows an empty state when there are no contacts', () => {
     mockFetch(null, [])
     render(<ContactPage />)

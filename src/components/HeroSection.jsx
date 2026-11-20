@@ -77,9 +77,18 @@ export default function HeroSection() {
         </div>
 
         {data?.ourBeginnings && (
-          <div className="hero__beginnings">
-            <h2 className="hero__subhead">Our beginnings</h2>
-            <div className="hero__text rich-text"><RichText value={data.ourBeginnings} /></div>
+          <div className={`hero__beginnings${data.beginningsImage?.asset ? ' hero__beginnings--photo' : ''}`}>
+            <div>
+              <h2 className="hero__subhead">Our beginnings</h2>
+              <div className="hero__text rich-text"><RichText value={data.ourBeginnings} /></div>
+            </div>
+            {data.beginningsImage?.asset && (
+              <img
+                className="hero__beginnings-image"
+                src={croppedImageUrl(data.beginningsImage, 1000, 750)}
+                alt={data.beginningsImage.alt || 'How Project Aurelian began'}
+              />
+            )}
           </div>
         )}
       </div>
