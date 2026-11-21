@@ -11,11 +11,9 @@ export default function SupportPage() {
   return (
     <div className="support-page page">
       <h1 className="section-title">Support Us</h1>
-      <div className="support-page__body rich-text">
-        {data?.body?.length > 0
-          ? <PortableText value={data.body} />
-          : <p className="section-subtitle">Your support helps us build. Details coming soon.</p>}
-      </div>
+      {data?.body?.length > 0 && (
+        <div className="support-page__body rich-text"><PortableText value={data.body} /></div>
+      )}
       <DonateBox url={data?.goFundMeUrl || DEFAULT_DONATE_URL} />
     </div>
   )
