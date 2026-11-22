@@ -43,13 +43,13 @@ function AboutMe({ member, onClose }) {
   )
 }
 
-export default function MemberCard({ member, tier = 'member' }) {
+export default function MemberCard({ member, tier = 'member', highlight = false }) {
   const [width, height] = PHOTO_SIZES[tier] || PHOTO_SIZES.member
   const [aboutOpen, setAboutOpen] = useState(false)
   const hasAbout = member.bio || member.contributions?.length > 0 || member.futureAspirations?.length > 0
 
   return (
-    <article className={`member-card member-card--${tier}`}>
+    <article id={member._id} className={`member-card member-card--${tier}${highlight ? ' member-card--highlight' : ''}`}>
       <img
         src={member.photo ? croppedImageUrl(member.photo, width, height) : '/placeholder-photo.svg'}
         alt={member.name}

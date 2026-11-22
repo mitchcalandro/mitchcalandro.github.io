@@ -1,5 +1,9 @@
 .members-preview__grid { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; }
-.members-preview__item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.members-preview__item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-decoration: none; }
+.members-preview__item:hover { text-decoration: none; }
+.members-preview__photo { transition: border-color var(--transition), transform var(--transition); }
+.members-preview__item:hover .members-preview__photo,
+.members-preview__item:focus-visible .members-preview__photo { border-color: var(--accent); transform: translateY(-3px); }
 .members-preview__photo { width: 100px; height: 125px; border-radius: var(--radius); object-fit: cover; border: 2px solid var(--border); }
 .members-preview__name { font-size: 0.85rem; color: var(--text-light); font-family: var(--font-heading); }
 .members-preview__more { display: inline-block; margin-top: 1.5rem; color: var(--accent-hover); text-decoration: none; font-weight: 600; }

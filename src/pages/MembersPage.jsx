@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import MemberCard from '../components/MemberCard'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries } from '../lib/sanity'
@@ -7,6 +8,12 @@ import './MembersPage.css'
 export default function MembersPage() {
   const { data: members } = useSanityFetch(queries.members)
   const byTier = Object.fromEntries(TIERS.map((t) => [t, (members || []).filter((m) => tierOf(m) === t)]))
+  // Arriving from a team photo elsewhere (/members#<id>): scroll to that card once the roster has loaded
+  const target = decodeURIComponent(window.location.hash.slice(1))
+
+  useEffect(() => {
+    if (target && members) document.getElementById(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [target, members])
 
   return (
     // The head-counts let MembersPage.css size each tier's cards to fill its rows
@@ -21,7 +28,7 @@ export default function MembersPage() {
         if (inTier.length === 0) return null
         return (
           <div key={tier} className={`members-page__tier members-page__tier--${tier}`}>
-            {inTier.map((m) => <MemberCard key={m._id} member={m} tier={tier} />)}
+            {inTier.map((m) => <MemberCard key={m._id} member={m} tier={tier} highlight={m._id === target} />)}
           </div>
         )
       })}

@@ -11,14 +11,15 @@ export default function MembersPreview() {
     <div className="members-preview">
       <div className="members-preview__grid">
         {byTier(members || []).map((m) => (
-          <div key={m._id} className="members-preview__item">
+          // Opens the Members page at this person's full card
+          <Link key={m._id} to={`/members#${m._id}`} className="members-preview__item">
             <img
               className="members-preview__photo"
               src={m.photo ? croppedImageUrl(m.photo, 200, 250) : '/placeholder-photo.svg'}
-              alt={m.name}
+              alt=""
             />
             <span className="members-preview__name">{m.name}</span>
-          </div>
+          </Link>
         ))}
       </div>
       <Link to="/members" className="members-preview__more">See more →</Link>

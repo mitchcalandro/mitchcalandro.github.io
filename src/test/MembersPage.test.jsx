@@ -71,4 +71,18 @@ describe('MembersPage', () => {
     expect(names).toEqual(['Numbered Boss', 'Numbered Lead', 'Numbered Member'])
     expect(container.querySelectorAll('.member-card--leadership')).toHaveLength(1)
   })
+
+  it('scrolls to and highlights the member named in the link from a team photo', () => {
+    window.history.replaceState(null, '', '/members#m4')
+    const scroll = vi.fn()
+    Element.prototype.scrollIntoView = scroll
+    useSanityFetch.mockReturnValue({ data: roster, loading: false })
+    const { container } = render(<MembersPage />)
+    const card = container.querySelector('#m4')
+    expect(card).toHaveClass('member-card--highlight')
+    expect(container.querySelectorAll('.member-card--highlight')).toHaveLength(1)
+    expect(scroll).toHaveBeenCalledTimes(1)
+    expect(scroll.mock.contexts[0]).toBe(card)
+    window.history.replaceState(null, '', '/')
+  })
 })

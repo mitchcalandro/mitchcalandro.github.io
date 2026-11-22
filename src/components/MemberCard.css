@@ -85,3 +85,14 @@
 .member-about__name { font-size: 1.75rem; margin-bottom: 1.5rem; }
 .member-about__block { margin-top: 1.5rem; }
 .member-about__block p { color: rgba(248,250,252,0.85); line-height: 1.75; margin-bottom: 0.75rem; }
+
+/* The card someone clicked through to from a team photo: clears the navbar and glows briefly */
+.member-card { scroll-margin-top: calc(var(--navbar-height) + 1.5rem); }
+.member-card--highlight { animation: member-highlight 2.4s ease-out 0.4s both; }
+@keyframes member-highlight {
+  0%, 40% { border-color: var(--flame); box-shadow: 0 0 0 3px rgba(251,146,60,0.45), 0 12px 30px rgba(0,0,0,0.35); }
+  100% { border-color: var(--border); box-shadow: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .member-card--highlight { animation: none; border-color: var(--flame); }
+}

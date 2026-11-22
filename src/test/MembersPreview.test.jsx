@@ -24,7 +24,13 @@ describe('MembersPreview', () => {
       { _id: 'e', name: 'Boss Two', tier: 'leadership' },
     ], loading: false })
     render(<MemoryRouter><MembersPreview /></MemoryRouter>)
-    const names = screen.getAllByRole('img').map((img) => img.alt)
+    const names = screen.getAllByRole('link').filter((a) => a.getAttribute('href') !== '/members').map((a) => a.textContent)
     expect(names).toEqual(['Boss One', 'Boss Two', 'Lead One', 'Member One', 'Member Two'])
+  })
+
+  it("links each photo to that person's card on the Members page", () => {
+    useSanityFetch.mockReturnValue({ data: [{ _id: 'm1', name: 'Scott Meeson', photo: null }], loading: false })
+    render(<MemoryRouter><MembersPreview /></MemoryRouter>)
+    expect(screen.getByRole('link', { name: 'Scott Meeson' })).toHaveAttribute('href', '/members#m1')
   })
 })
