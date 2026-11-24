@@ -10,10 +10,11 @@ const DEFAULT_INTEREST_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeNY
 export default function ContactPage() {
   const { data: settings } = useSanityFetch(queries.siteSettings)
   const { data: contacts } = useSanityFetch(queries.contact)
+  const { data: page } = useSanityFetch(queries.contactPage)
 
   const formspreeId = settings?.formspreeId || DEFAULT_FORMSPREE_ID
   const interestFormUrl = settings?.interestFormUrl || DEFAULT_INTEREST_FORM_URL
-  const photo = settings?.contactPhoto?.asset ? settings.contactPhoto : null
+  const photo = page?.photo?.asset ? page.photo : null
 
   return (
     <div className="contact-page page">

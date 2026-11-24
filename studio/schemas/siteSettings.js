@@ -1,10 +1,5 @@
+import { captionFields } from './captionFields'
 import { formattedLine } from './formattedLine'
-
-// Caption and its on/off switch, for the photo boxes on the Home, Project and Contact pages
-const captionFields = [
-  { name: 'caption', title: 'Caption', type: 'string', description: 'Optional, shown under the photo' },
-  { name: 'hideCaption', title: 'Hide caption', type: 'boolean', description: 'Turn on to hide the caption on the site without deleting it' },
-]
 
 // An image in the project text, with where it sits and how big it is
 const projectImage = {
@@ -127,17 +122,6 @@ export default {
         { name: 'alt', title: 'Alt text', type: 'string', description: 'Describe the photo for screen readers' },
       ],
       description: 'Shown to the right of the project description with the text wrapping around it (above the text on phones). The whole photo shows; use the crop tool to trim it. Leave empty to show the text alone.',
-    },
-    {
-      name: 'contactPhoto',
-      title: 'Contact page photo',
-      type: 'image',
-      options: { hotspot: true },
-      fields: [
-        ...captionFields,
-        { name: 'alt', title: 'Alt text', type: 'string', description: 'Describe the photo for screen readers' },
-      ],
-      description: 'Shown beside the message form, above the interest form box. The whole photo shows and the form stretches to match its height, so a landscape photo works best; use the crop tool to trim it. Leave empty to show the form on its own.',
     },
     {
       name: 'projectBody',

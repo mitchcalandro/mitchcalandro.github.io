@@ -16,18 +16,29 @@ const ORDERED_TYPES = {
   ],
 }
 
+const sortedList = (S, type) => S.documentTypeList(type).defaultOrdering(ORDERED_TYPES[type])
+
+// Contact opens to the page photo (a single document) and the list of people
+const contactItems = (S) => S.list()
+  .title('Contact')
+  .items([
+    S.listItem()
+      .id('contactPage')
+      .title('Contact page photo')
+      .schemaType('contactPage')
+      .child(S.document().schemaType('contactPage').documentId('contactPage')),
+    S.documentTypeListItem('contactInfo').title('People').child(sortedList(S, 'contactInfo').title('People')),
+  ])
+
 // Keeps the sidebar in schema order and only swaps in the sorted lists
 export function structure(S) {
   return S.list()
     .title('Content')
     .items(
-      S.documentTypeListItems().map((item) => {
+      S.documentTypeListItems().filter((item) => item.getId() !== 'contactPage').map((item) => {
         const type = item.getId()
-        if (ORDERED_TYPES[type]) {
-          return S.documentTypeListItem(type).child(
-            S.documentTypeList(type).defaultOrdering(ORDERED_TYPES[type]),
-          )
-        }
+        if (type === 'contactInfo') return S.documentTypeListItem(type).child(contactItems(S))
+        if (ORDERED_TYPES[type]) return S.documentTypeListItem(type).child(sortedList(S, type))
         return item
       }),
     )

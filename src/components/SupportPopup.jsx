@@ -62,7 +62,7 @@ export default function SupportPopup({ url, suppressed = false }) {
 
         <h2 className="support-popup__title" id="support-popup-title">Support Us!</h2>
         <p className="support-popup__body">
-          Project Aurelian is a student-built liquid rocket. Every donation goes straight into
+          Project Aurelian is a student-led liquid rocketry team. Every donation goes straight into
           parts, propellant, and test hardware that get us closer to launch.
         </p>
 

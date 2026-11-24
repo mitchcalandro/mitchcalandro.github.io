@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 
 vi.mock('../hooks/useSanityFetch', () => ({ useSanityFetch: vi.fn() }))
-vi.mock('../lib/sanity', () => ({ queries: { siteSettings: 's', contact: 'c' }, fullImageUrl: () => '/img.jpg', croppedImageUrl: () => '/p.jpg' }))
+vi.mock('../lib/sanity', () => ({ queries: { siteSettings: 's', contact: 'c', contactPage: 'p' }, fullImageUrl: () => '/img.jpg', croppedImageUrl: () => '/p.jpg' }))
 vi.mock('../components/ContactForm', () => ({ default: ({ formspreeId }) => <form data-testid="contact-form" data-form-id={formspreeId} /> }))
 
 import ContactPage from '../pages/ContactPage'
@@ -13,9 +13,8 @@ const contacts = [
   { _id: 'c2', name: 'Mitchell Calandro', role: 'Project Manager', email: 'mitchelldcalandro@gmail.com' },
 ]
 
-const mockFetch = (settings, contactData = contacts) =>
-  useSanityFetch.mockImplementation((q) =>
-    q === 's' ? { data: settings, loading: false } : { data: contactData, loading: false })
+const mockFetch = (settings, contactData = contacts, page = null) =>
+  useSanityFetch.mockImplementation((q) => ({ data: { s: settings, c: contactData, p: page }[q], loading: false }))
 
 describe('ContactPage', () => {
   it('renders a card per contact with a personal email link', () => {
@@ -65,7 +64,7 @@ describe('ContactPage', () => {
     expect(container.querySelector('.contact-page__main')).toBeNull()
     unmount()
 
-    mockFetch({ contactPhoto: { asset: { _ref: 'image-c' }, caption: 'At the bench' } })
+    mockFetch(null, contacts, { photo: { asset: { _ref: 'image-c' }, caption: 'At the bench' } })
     render(<ContactPage />)
     const side = screen.getByAltText('At the bench').closest('.contact-page__side')
     expect(side).toContainElement(screen.getByRole('link', { name: /interest form/i }))

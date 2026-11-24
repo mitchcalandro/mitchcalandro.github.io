@@ -6,6 +6,7 @@ import faq from './faq'
 import galleryItem from './galleryItem'
 import supportContent from './supportContent'
 import contactInfo from './contactInfo'
+import contactPage from './contactPage'
 
 export const schemaTypes = [
   siteSettings,
@@ -16,4 +17,5 @@ export const schemaTypes = [
   galleryItem,
   supportContent,
   contactInfo,
+  contactPage,
 ]

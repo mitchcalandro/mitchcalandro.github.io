@@ -33,7 +33,7 @@ const IMAGE_ASSET = '"asset": asset->{ _id, url, metadata { dimensions } }'
 
 export const queries = {
   siteSettings: `*[_type == "siteSettings"][0]{
-    heroHeadline, heroTagline, heroImage, logo, whoWeAre, ourBeginnings, beginningsImage, goFundMeUrl, interestFormUrl, projectBody, projectPhoto, contactPhoto, lastUpdated, footerText, formspreeId,
+    heroHeadline, heroTagline, heroImage, logo, whoWeAre, ourBeginnings, beginningsImage, goFundMeUrl, interestFormUrl, projectBody, projectPhoto, lastUpdated, footerText, formspreeId,
     currentPhase->{ _id, name, order }
   }`,
   newsletter: `*[_type == "newsletter"] | order(year desc, month desc){ _id, title, month, year, preview, body }`,
@@ -44,6 +44,7 @@ export const queries = {
   support: `*[_type == "supportContent"][0]{ body, goFundMeUrl, photo }`,
   // Each contact's photo comes from the member with the same name
   contact: `*[_type == "contactInfo"] | order(order asc){ _id, name, role, email, linkedInUrl, githubUrl, "photo": *[_type == "member" && name == ^.name][0].photo }`,
+  contactPage: `*[_id == "contactPage"][0]{ photo }`,
   // Every image posted anywhere on the site except member photos, grouped by where it was posted
   gallery: `{
     "memberPhotos": *[_type == "member" && defined(photo.asset)].photo.asset._ref,
