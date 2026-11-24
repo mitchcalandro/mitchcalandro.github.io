@@ -27,19 +27,20 @@ export default function ContactPage() {
         <ContactForm formspreeId={formspreeId} />
 
         <div className="contact-page__side">
-          {photo && (
-            <PhotoFrame className="contact-page__photo" image={photo} src={fullImageUrl(photo, 1400)} alt="Project Aurelian team" />
-          )}
           <aside className="contact-page__interest">
             <div>
               <h2 className="contact-page__interest-title">Want to work on the project?</h2>
               <p>Fill out our interest form and we'll be in touch.</p>
             </div>
-            <a className="btn-primary" href={interestFormUrl} target="_blank" rel="noopener noreferrer">Interest form ↗</a>
+            <a className="btn-primary contact-page__interest-link" href={interestFormUrl} target="_blank" rel="noopener noreferrer">Interest form ↗</a>
           </aside>
+          {photo && (
+            <PhotoFrame image={photo} src={fullImageUrl(photo, 1400)} alt="Project Aurelian team" />
+          )}
         </div>
       </div>
 
+      <h2 className="contact-page__people-title">Contact us directly</h2>
       {(!contacts || contacts.length === 0) && (
         <p className="section-subtitle">Contact details coming soon.</p>
       )}
