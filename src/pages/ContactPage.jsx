@@ -1,6 +1,7 @@
 import ContactForm from '../components/ContactForm'
+import PhotoFrame from '../components/PhotoFrame'
 import { useSanityFetch } from '../hooks/useSanityFetch'
-import { queries } from '../lib/sanity'
+import { queries, fullImageUrl } from '../lib/sanity'
 import './ContactPage.css'
 
 const DEFAULT_FORMSPREE_ID = 'xyeeeykj'
@@ -12,6 +13,7 @@ export default function ContactPage() {
 
   const formspreeId = settings?.formspreeId || DEFAULT_FORMSPREE_ID
   const interestFormUrl = settings?.interestFormUrl || DEFAULT_INTEREST_FORM_URL
+  const photo = settings?.contactPhoto?.asset ? settings.contactPhoto : null
 
   return (
     <div className="contact-page page">
@@ -20,15 +22,22 @@ export default function ContactPage() {
         For inquiries or concerns, send us a message below. Response within 48 hours during regular business hours.
       </p>
 
-      <ContactForm formspreeId={formspreeId} />
+      <div className={photo ? 'contact-page__main' : undefined}>
+        <ContactForm formspreeId={formspreeId} />
 
-      <aside className="contact-page__interest">
-        <div>
-          <h2 className="contact-page__interest-title">Want to work on the project?</h2>
-          <p>Fill out our interest form and we'll be in touch.</p>
+        <div className="contact-page__side">
+          {photo && (
+            <PhotoFrame className="contact-page__photo" image={photo} src={fullImageUrl(photo, 1400)} alt="Project Aurelian team" />
+          )}
+          <aside className="contact-page__interest">
+            <div>
+              <h2 className="contact-page__interest-title">Want to work on the project?</h2>
+              <p>Fill out our interest form and we'll be in touch.</p>
+            </div>
+            <a className="btn-primary" href={interestFormUrl} target="_blank" rel="noopener noreferrer">Interest form ↗</a>
+          </aside>
         </div>
-        <a className="btn-primary" href={interestFormUrl} target="_blank" rel="noopener noreferrer">Interest form ↗</a>
-      </aside>
+      </div>
 
       {(!contacts || contacts.length === 0) && (
         <p className="section-subtitle">Contact details coming soon.</p>

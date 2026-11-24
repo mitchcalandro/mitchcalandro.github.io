@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 
 vi.mock('../hooks/useSanityFetch', () => ({ useSanityFetch: vi.fn() }))
-vi.mock('../lib/sanity', () => ({ queries: { siteSettings: 's', contact: 'c' }, urlFor: () => ({ width: () => ({ height: () => ({ url: () => '/p.svg' }) }) }) }))
+vi.mock('../lib/sanity', () => ({ queries: { siteSettings: 's', contact: 'c' }, fullImageUrl: () => '/img.jpg', urlFor: () => ({ width: () => ({ height: () => ({ url: () => '/p.svg' }) }) }) }))
 vi.mock('../components/ContactForm', () => ({ default: ({ formspreeId }) => <form data-testid="contact-form" data-form-id={formspreeId} /> }))
 
 import ContactPage from '../pages/ContactPage'
@@ -49,6 +49,19 @@ describe('ContactPage', () => {
     mockFetch({ interestFormUrl: 'https://forms.example.com/join' })
     render(<ContactPage />)
     expect(screen.getByRole('link', { name: /interest form/i })).toHaveAttribute('href', 'https://forms.example.com/join')
+  })
+
+  it('puts the photo and interest form beside the message form once a photo is set', () => {
+    mockFetch({})
+    const { container, unmount } = render(<ContactPage />)
+    expect(container.querySelector('.contact-page__main')).toBeNull()
+    unmount()
+
+    mockFetch({ contactPhoto: { asset: { _ref: 'image-c' }, caption: 'At the bench' } })
+    render(<ContactPage />)
+    const side = screen.getByAltText('At the bench').closest('.contact-page__side')
+    expect(side).toContainElement(screen.getByRole('link', { name: /interest form/i }))
+    expect(side.parentElement).toContainElement(screen.getByTestId('contact-form'))
   })
 
   it('shows an empty state when there are no contacts', () => {

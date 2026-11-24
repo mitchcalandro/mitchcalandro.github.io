@@ -46,6 +46,28 @@ describe('HeroSection', () => {
     expect(screen.getByAltText('Founding photo')).toHaveAttribute('src', '/hero.jpg')
   })
 
+  it('shows captions under the hero and Our beginnings photos unless they are hidden', () => {
+    const show = (hideCaption) => {
+      useSanityFetch.mockReturnValue({
+        data: {
+          ourBeginnings: 'It started in a garage.',
+          heroImage: { asset: { _ref: 'image-1' }, caption: 'Build day', hideCaption },
+          beginningsImage: { asset: { _ref: 'image-3' }, caption: 'The founders', hideCaption },
+        },
+        loading: false,
+      })
+      return render(<MemoryRouter><HeroSection /></MemoryRouter>)
+    }
+    const { unmount } = show(false)
+    expect(screen.getByText('Build day').closest('figure')).toHaveClass('hero__media')
+    expect(screen.getByText('The founders').closest('figure')).toHaveClass('hero__beginnings-media')
+    unmount()
+
+    show(true)
+    expect(screen.queryByText('Build day')).not.toBeInTheDocument()
+    expect(screen.queryByText('The founders')).not.toBeInTheDocument()
+  })
+
   it('shows the current phase, progress through the phases and team size', () => {
     const data = {
       s: { currentPhase: { _id: 'p2', name: 'Phase 2 - Testing' } },

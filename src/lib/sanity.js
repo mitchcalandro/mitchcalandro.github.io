@@ -33,7 +33,7 @@ const IMAGE_ASSET = '"asset": asset->{ _id, url, metadata { dimensions } }'
 
 export const queries = {
   siteSettings: `*[_type == "siteSettings"][0]{
-    heroHeadline, heroTagline, heroImage, logo, whoWeAre, ourBeginnings, beginningsImage, goFundMeUrl, interestFormUrl, projectBody, projectPhoto, lastUpdated, footerText, formspreeId,
+    heroHeadline, heroTagline, heroImage, logo, whoWeAre, ourBeginnings, beginningsImage, goFundMeUrl, interestFormUrl, projectBody, projectPhoto, contactPhoto, lastUpdated, footerText, formspreeId,
     currentPhase->{ _id, name, order }
   }`,
   newsletter: `*[_type == "newsletter"] | order(year desc, month desc){ _id, title, month, year, preview, body }`,

@@ -7,7 +7,7 @@
 .contact-card__email:hover { color: var(--accent); }
 .contact-card__link { display: inline-block; color: var(--accent-hover); text-decoration: none; }
 
-/* Link out to the join-the-team form, between the message form and the contact cards */
+/* Link out to the join-the-team form */
 .contact-page__interest {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem 2rem;
   max-width: 560px; margin: 3rem auto;
@@ -16,3 +16,15 @@
 }
 .contact-page__interest-title { font-family: var(--font-heading); font-size: 1.2rem; color: var(--text-light); margin-bottom: 0.25rem; }
 .contact-page__interest p { color: var(--text-muted); margin: 0; }
+
+/* With a photo: the form on the left, the photo and interest box on the right, equally wide and tall */
+.contact-page__main { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem 2rem; margin-bottom: 3rem; }
+.contact-page__main > :is(.contact-form, .contact-form__success) { max-width: none; margin: 0; align-content: center; }
+.contact-page__main .contact-form__textarea { flex: 1 0 auto; }
+.contact-page__main .contact-page__side { display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; }
+.contact-page__main .contact-page__interest { max-width: none; margin: 0; }
+.contact-page__photo .photo-frame { margin-bottom: 1.75rem; }
+
+@media (max-width: 900px) {
+  .contact-page__main { grid-template-columns: 1fr; }
+}

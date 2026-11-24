@@ -166,7 +166,8 @@
 .hero__beginnings--photo .hero__text { grid-area: text; }
 
 /* The image is taken out of the flow so the text alone sets the row height */
-.hero__beginnings-media { grid-area: media; position: relative; min-height: 18rem; }
+.hero__beginnings-media { grid-area: media; display: flex; flex-direction: column; gap: 0.75rem; min-height: 18rem; }
+.hero__beginnings-frame { position: relative; flex: 1; }
 .hero__beginnings-image {
   position: absolute;
   inset: 0;
@@ -205,5 +206,6 @@
   .hero__about { grid-template-columns: 1fr; gap: 2.5rem; }
   .hero__beginnings { margin-top: 3rem; }
   .hero__beginnings--photo { grid-template-columns: 1fr; grid-template-areas: 'head' 'text' 'media'; }
-  .hero__beginnings-media { min-height: 0; aspect-ratio: 4 / 3; margin-top: 2rem; }
+  .hero__beginnings-media { min-height: 0; margin-top: 2rem; }
+  .hero__beginnings-frame { flex: none; aspect-ratio: 4 / 3; }
 }

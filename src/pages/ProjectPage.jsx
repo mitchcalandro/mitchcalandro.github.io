@@ -2,6 +2,7 @@ import { PortableText } from '../lib/portableText'
 import PhaseCard from '../components/PhaseCard'
 import PhaseTimeline from '../components/PhaseTimeline'
 import MembersPreview from '../components/MembersPreview'
+import PhotoFrame from '../components/PhotoFrame'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries, fullImageUrl } from '../lib/sanity'
 import './ProjectPage.css'
@@ -43,12 +44,12 @@ export default function ProjectPage() {
 
       <div className="project__body rich-text">
         {settings?.projectPhoto?.asset && (
-          <figure className="project__photo">
-            <div className="photo-frame">
-              <img src={fullImageUrl(settings.projectPhoto, 1400)} alt={settings.projectPhoto.alt || settings.projectPhoto.caption || 'Project Aurelian team at work'} />
-            </div>
-            {settings.projectPhoto.caption && <figcaption>{settings.projectPhoto.caption}</figcaption>}
-          </figure>
+          <PhotoFrame
+            className="project__photo"
+            image={settings.projectPhoto}
+            src={fullImageUrl(settings.projectPhoto, 1400)}
+            alt="Project Aurelian team at work"
+          />
         )}
         {settings?.projectBody?.length > 0
           ? <PortableText value={settings.projectBody} components={ptComponents} />

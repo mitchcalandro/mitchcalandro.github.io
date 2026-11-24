@@ -10,8 +10,7 @@
 /* Images in the project text: floated left/right images let the text wrap beside them */
 .project__figure { margin: 0.4rem 0 1.5rem; }
 .project__figure img { width: 100%; border-radius: var(--radius); border: 1px solid var(--border); }
-:is(.project__figure, .project__photo) figcaption { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; text-align: center; font-style: italic; }
-.project__photo figcaption { margin-top: 0; }
+.project__figure figcaption { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; text-align: center; font-style: italic; }
 .project__figure--left { float: left; margin-right: 2rem; }
 .project__figure--right { float: right; margin-left: 2rem; }
 /* a new left/right image starts below any earlier one, so text never gets squeezed between two */

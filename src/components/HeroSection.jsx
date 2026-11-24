@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries, croppedImageUrl, fullImageUrl, logoUrl } from '../lib/sanity'
+import PhotoCaption from './PhotoCaption'
+import PhotoFrame from './PhotoFrame'
 import RichText from './RichText'
 import './HeroSection.css'
 
@@ -67,13 +69,13 @@ export default function HeroSection() {
         )}
 
         <div className="hero__about">
-          <div className="hero__media photo-frame hero__reveal">
-            <img
-              className="hero__image"
-              src={data?.heroImage ? croppedImageUrl(data.heroImage, 1000, 1000) : '/placeholder-hero.svg'}
-              alt="Project Aurelian rocket"
-            />
-          </div>
+          <PhotoFrame
+            className="hero__media hero__reveal"
+            imgClassName="hero__image"
+            image={data?.heroImage}
+            src={data?.heroImage ? croppedImageUrl(data.heroImage, 1000, 1000) : '/placeholder-hero.svg'}
+            alt="Project Aurelian rocket"
+          />
           <div className="hero__about-text hero__reveal">
             <h2 className="hero__subhead">Who are we?</h2>
             <div className="hero__lead rich-text">
@@ -91,14 +93,17 @@ export default function HeroSection() {
             <h2 className="hero__subhead">Our beginnings</h2>
             <div className="hero__text rich-text"><RichText value={data.ourBeginnings} /></div>
             {data.beginningsImage?.asset && (
-              <div className="hero__beginnings-media">
-                <img
-                  className="hero__beginnings-image"
-                  src={fullImageUrl(data.beginningsImage, 1200)}
-                  style={{ objectPosition: focusPoint(data.beginningsImage) }}
-                  alt={data.beginningsImage.alt || 'How Project Aurelian began'}
-                />
-              </div>
+              <figure className="hero__beginnings-media">
+                <div className="hero__beginnings-frame">
+                  <img
+                    className="hero__beginnings-image"
+                    src={fullImageUrl(data.beginningsImage, 1200)}
+                    style={{ objectPosition: focusPoint(data.beginningsImage) }}
+                    alt={data.beginningsImage.alt || data.beginningsImage.caption || 'How Project Aurelian began'}
+                  />
+                </div>
+                <PhotoCaption image={data.beginningsImage} />
+              </figure>
             )}
           </div>
         )}
