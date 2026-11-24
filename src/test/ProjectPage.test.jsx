@@ -41,8 +41,9 @@ describe('ProjectPage', () => {
     expect(screen.getByText('Our efforts')).toBeInTheDocument()
     unmount()
 
-    show({ projectBody, projectPhoto: { asset: { _ref: 'image-p' }, alt: 'Assembly day' } })
-    expect(screen.getByAltText('Assembly day').parentElement).toHaveClass('project__photo', 'photo-frame')
+    show({ projectBody, projectPhoto: { asset: { _ref: 'image-p' }, caption: 'Assembly day' } })
+    expect(screen.getByAltText('Assembly day').parentElement).toHaveClass('photo-frame')
+    expect(screen.getByText('Assembly day').tagName).toBe('FIGCAPTION')
     expect(screen.getByText('Our efforts')).toBeInTheDocument()
   })
 

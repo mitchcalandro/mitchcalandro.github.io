@@ -43,9 +43,12 @@ export default function ProjectPage() {
 
       <div className="project__body rich-text">
         {settings?.projectPhoto?.asset && (
-          <div className="project__photo photo-frame">
-            <img src={fullImageUrl(settings.projectPhoto, 1400)} alt={settings.projectPhoto.alt || 'Project Aurelian team at work'} />
-          </div>
+          <figure className="project__photo">
+            <div className="photo-frame">
+              <img src={fullImageUrl(settings.projectPhoto, 1400)} alt={settings.projectPhoto.alt || settings.projectPhoto.caption || 'Project Aurelian team at work'} />
+            </div>
+            {settings.projectPhoto.caption && <figcaption>{settings.projectPhoto.caption}</figcaption>}
+          </figure>
         )}
         {settings?.projectBody?.length > 0
           ? <PortableText value={settings.projectBody} components={ptComponents} />

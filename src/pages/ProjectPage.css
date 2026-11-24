@@ -3,13 +3,15 @@
 .project__phases { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
 
 /* The page photo keeps its own shape, so all of it shows, and the text wraps on its left.
-   The bottom margin leaves room for the outline. */
-.project__photo { float: right; width: 50%; margin: 0 0 2.75rem 2rem; }
+   The frame's bottom margin leaves room for the outline. */
+.project__photo { float: right; width: 50%; margin: 0 0 1rem 2rem; }
+.project__photo .photo-frame { margin-bottom: 1.75rem; }
 
 /* Images in the project text: floated left/right images let the text wrap beside them */
 .project__figure { margin: 0.4rem 0 1.5rem; }
 .project__figure img { width: 100%; border-radius: var(--radius); border: 1px solid var(--border); }
-.project__figure figcaption { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; text-align: center; font-style: italic; }
+:is(.project__figure, .project__photo) figcaption { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; text-align: center; font-style: italic; }
+.project__photo figcaption { margin-top: 0; }
 .project__figure--left { float: left; margin-right: 2rem; }
 .project__figure--right { float: right; margin-left: 2rem; }
 /* a new left/right image starts below any earlier one, so text never gets squeezed between two */
