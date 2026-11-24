@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 
 vi.mock('../hooks/useSanityFetch', () => ({ useSanityFetch: vi.fn() }))
-vi.mock('../lib/sanity', () => ({ queries: { siteSettings: 's', contact: 'c' }, fullImageUrl: () => '/img.jpg', urlFor: () => ({ width: () => ({ height: () => ({ url: () => '/p.svg' }) }) }) }))
+vi.mock('../lib/sanity', () => ({ queries: { siteSettings: 's', contact: 'c' }, fullImageUrl: () => '/img.jpg', croppedImageUrl: () => '/p.jpg' }))
 vi.mock('../components/ContactForm', () => ({ default: ({ formspreeId }) => <form data-testid="contact-form" data-form-id={formspreeId} /> }))
 
 import ContactPage from '../pages/ContactPage'
@@ -25,6 +25,14 @@ describe('ContactPage', () => {
     expect(screen.getByText('Mitchell Calandro')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /scottdmeesonjr@gmail.com/i }))
       .toHaveAttribute('href', 'mailto:scottdmeesonjr@gmail.com')
+  })
+
+  it("shows a contact's member photo when they have one", () => {
+    mockFetch(null, [{ ...contacts[0], photo: { asset: { _ref: 'image-s' } } }, contacts[1]])
+    render(<ContactPage />)
+    expect(screen.getByAltText('Scott Meeson')).toHaveAttribute('src', '/p.jpg')
+    expect(screen.queryByAltText('Mitchell Calandro')).not.toBeInTheDocument()
+    expect(screen.getByText('Mitchell Calandro')).toBeInTheDocument()
   })
 
   it('renders one form using the built-in form id when Sanity has none', () => {

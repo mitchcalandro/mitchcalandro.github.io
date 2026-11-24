@@ -42,7 +42,8 @@ export const queries = {
   faqs: `*[_type == "faq"] | order(order asc){ _id, question, answer }`,
   members: `*[_type == "member"] | order(order asc){ _id, name, role, tier, photo, resumeUrl, portfolioUrl, bio, contributions, futureAspirations, githubUrl, email }`,
   support: `*[_type == "supportContent"][0]{ body, goFundMeUrl, photo }`,
-  contact: `*[_type == "contactInfo"] | order(order asc){ _id, name, role, email, linkedInUrl, githubUrl, photo }`,
+  // Each contact's photo comes from the member with the same name
+  contact: `*[_type == "contactInfo"] | order(order asc){ _id, name, role, email, linkedInUrl, githubUrl, "photo": *[_type == "member" && name == ^.name][0].photo }`,
   // Every image posted anywhere on the site except member photos, grouped by where it was posted
   gallery: `{
     "memberPhotos": *[_type == "member" && defined(photo.asset)].photo.asset._ref,

@@ -1,7 +1,7 @@
 import ContactForm from '../components/ContactForm'
 import PhotoFrame from '../components/PhotoFrame'
 import { useSanityFetch } from '../hooks/useSanityFetch'
-import { queries, fullImageUrl } from '../lib/sanity'
+import { queries, croppedImageUrl, fullImageUrl } from '../lib/sanity'
 import './ContactPage.css'
 
 const DEFAULT_FORMSPREE_ID = 'xyeeeykj'
@@ -46,14 +46,17 @@ export default function ContactPage() {
       <div className="contact-page__grid">
         {contacts?.map((c) => (
           <article key={c._id} className="contact-card">
-            <h3 className="contact-card__name">{c.name}</h3>
-            <p className="contact-card__role">{c.role}</p>
-            {c.email && (
-              <a className="contact-card__email" href={`mailto:${c.email}`}>{c.email}</a>
-            )}
-            {c.linkedInUrl && (
-              <a className="contact-card__link" href={c.linkedInUrl} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            )}
+            {c.photo?.asset && <img className="contact-card__photo" src={croppedImageUrl(c.photo, 256, 320)} alt={c.name} />}
+            <div className="contact-card__info">
+              <h3 className="contact-card__name">{c.name}</h3>
+              <p className="contact-card__role">{c.role}</p>
+              {c.email && (
+                <a className="contact-card__email" href={`mailto:${c.email}`}>{c.email}</a>
+              )}
+              {c.linkedInUrl && (
+                <a className="contact-card__link" href={c.linkedInUrl} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              )}
+            </div>
           </article>
         ))}
       </div>
