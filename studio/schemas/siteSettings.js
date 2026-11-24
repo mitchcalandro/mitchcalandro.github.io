@@ -108,6 +108,14 @@ export default {
       description: 'Link for people who want to join the project, shown as a box on the Contact page. Leave blank to use the Google Form built into the site.',
     },
     {
+      name: 'projectPhoto',
+      title: 'Project page photo',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [{ name: 'alt', title: 'Alt text', type: 'string', description: 'Describe the photo for screen readers' }],
+      description: 'Shown to the right of the project description, stretched to the height of the text (4:3 under it on phones). The edges get trimmed to fit, so set the hotspot on the important part. Leave empty to show the text alone.',
+    },
+    {
       name: 'projectBody',
       title: 'Project Description (in-depth)',
       type: 'array',

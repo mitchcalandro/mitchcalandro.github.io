@@ -33,7 +33,7 @@ const IMAGE_ASSET = '"asset": asset->{ _id, url, metadata { dimensions } }'
 
 export const queries = {
   siteSettings: `*[_type == "siteSettings"][0]{
-    heroHeadline, heroTagline, heroImage, logo, whoWeAre, ourBeginnings, beginningsImage, goFundMeUrl, interestFormUrl, projectBody, lastUpdated, footerText, formspreeId,
+    heroHeadline, heroTagline, heroImage, logo, whoWeAre, ourBeginnings, beginningsImage, goFundMeUrl, interestFormUrl, projectBody, projectPhoto, lastUpdated, footerText, formspreeId,
     currentPhase->{ _id, name, order }
   }`,
   newsletter: `*[_type == "newsletter"] | order(year desc, month desc){ _id, title, month, year, preview, body }`,
@@ -59,7 +59,7 @@ export const queries = {
       "images": body[_type == "image" && defined(asset)]{ ${IMAGE_ASSET} }
     },
     "project": *[_type == "siteSettings"][0]{
-      "images": (coalesce(projectBody[_type == "image"], []) + coalesce(projectBody[_type == "columns"].columns[].body[_type == "image"], []))[defined(asset)]{ ${IMAGE_ASSET} }
+      "images": ([projectPhoto] + coalesce(projectBody[_type == "image"], []) + coalesce(projectBody[_type == "columns"].columns[].body[_type == "image"], []))[defined(asset)]{ ${IMAGE_ASSET} }
     }
   }`,
 }

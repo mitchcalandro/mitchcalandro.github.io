@@ -30,6 +30,26 @@ describe('ProjectPage', () => {
     expect(screen.getByAltText('Engine').closest('figure')).toHaveClass('project__figure--full')
   })
 
+  it('shows the project photo beside the text only once one is set', () => {
+    const projectBody = [{ _type: 'block', _key: 'a', children: [{ _type: 'span', _key: 's', text: 'Our efforts' }] }]
+    const show = (settings) => {
+      useSanityFetch.mockImplementation((q) => ({ data: q === 's' ? settings : null, loading: false }))
+      return render(<MemoryRouter><ProjectPage /></MemoryRouter>)
+    }
+    const { container, unmount } = show({ projectBody })
+    expect(container.querySelector('.with-photo')).toBeNull()
+    expect(screen.getByText('Our efforts')).toBeInTheDocument()
+    unmount()
+
+    show({ projectBody, projectPhoto: {
+      asset: { _ref: 'image-p' }, alt: 'Assembly day',
+      crop: { top: 0, bottom: 0, left: 0.5, right: 0 }, hotspot: { x: 0.75, y: 0.4 },
+    } })
+    expect(screen.getByText('Our efforts').closest('.with-photo')).toContainElement(screen.getByAltText('Assembly day'))
+    // The hotspot is three quarters across the original, which is the middle of the cropped half
+    expect(screen.getByAltText('Assembly day').style.objectPosition).toBe('50% 40%')
+  })
+
   it('lays a Columns block out side by side, one column per entry', () => {
     const para = (k, text) => ({ _type: 'block', _key: k, children: [{ _type: 'span', _key: k + 's', text }] })
     const projectBody = [{ _type: 'columns', _key: 'c', columns: [
