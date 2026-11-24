@@ -2,7 +2,6 @@ import { PortableText } from '../lib/portableText'
 import PhaseCard from '../components/PhaseCard'
 import PhaseTimeline from '../components/PhaseTimeline'
 import MembersPreview from '../components/MembersPreview'
-import WithPhoto from '../components/WithPhoto'
 import { useSanityFetch } from '../hooks/useSanityFetch'
 import { queries, fullImageUrl } from '../lib/sanity'
 import './ProjectPage.css'
@@ -42,14 +41,15 @@ export default function ProjectPage() {
     <div className="project page">
       <h1 className="section-title">Project Aurelian</h1>
 
-      <div className="project__body">
-        <WithPhoto image={settings?.projectPhoto} alt="Project Aurelian team at work">
-          <div className="rich-text">
-            {settings?.projectBody?.length > 0
-              ? <PortableText value={settings.projectBody} components={ptComponents} />
-              : <p className="section-subtitle">Project details coming soon.</p>}
+      <div className="project__body rich-text">
+        {settings?.projectPhoto?.asset && (
+          <div className="project__photo photo-frame">
+            <img src={fullImageUrl(settings.projectPhoto, 1400)} alt={settings.projectPhoto.alt || 'Project Aurelian team at work'} />
           </div>
-        </WithPhoto>
+        )}
+        {settings?.projectBody?.length > 0
+          ? <PortableText value={settings.projectBody} components={ptComponents} />
+          : <p className="section-subtitle">Project details coming soon.</p>}
       </div>
 
       <h2 className="section-title project__subhead">Phases</h2>

@@ -149,7 +149,26 @@ section:nth-of-type(even) {
   color: var(--text-dark);
 }
 
+/* Photo with an offset outline behind it (Home and Project pages) */
+.photo-frame { position: relative; }
+.photo-frame::before {
+  content: '';
+  position: absolute;
+  inset: 1.25rem -1.25rem -1.25rem 1.25rem;
+  border: 1px solid rgba(96,165,250,0.45);
+  border-radius: calc(var(--radius) * 2);
+}
+.photo-frame img {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: calc(var(--radius) * 2);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+}
+
 @media (max-width: 768px) {
+  .photo-frame::before { inset: 0.75rem -0.75rem -0.75rem 0.75rem; }
   :root {
     --section-padding: 4rem 1.25rem;
   }

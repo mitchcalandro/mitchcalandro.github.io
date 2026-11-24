@@ -117,24 +117,9 @@
   align-items: center;
 }
 
-/* Offset outline behind the photo */
-.hero__media { position: relative; }
-.hero__media::before {
-  content: '';
-  position: absolute;
-  inset: 1.25rem -1.25rem -1.25rem 1.25rem;
-  border: 1px solid rgba(96,165,250,0.45);
-  border-radius: calc(var(--radius) * 2);
-}
-
 .hero__image {
-  position: relative;
-  width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
-  border-radius: calc(var(--radius) * 2);
-  border: 1px solid var(--border);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.45);
 }
 
 .hero__subhead {
@@ -170,6 +155,29 @@
   border-top: 1px solid var(--border);
 }
 
+/* Heading on top, photo beside the paragraph and exactly as tall as it */
+.hero__beginnings--photo {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  grid-template-areas: 'head head' 'text media';
+  column-gap: 4rem;
+}
+.hero__beginnings--photo .hero__subhead { grid-area: head; }
+.hero__beginnings--photo .hero__text { grid-area: text; }
+
+/* The image is taken out of the flow so the text alone sets the row height */
+.hero__beginnings-media { grid-area: media; position: relative; min-height: 18rem; }
+.hero__beginnings-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: calc(var(--radius) * 2);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+}
+
 /* Staggered fade-up on load */
 .hero__reveal { animation: hero-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 .hero__headline { animation-delay: 0.05s; }
@@ -195,6 +203,7 @@
   .hero__stat--progress { grid-column: auto; }
   .hero__stat + .hero__stat { border-left: none; border-top: 1px solid var(--border); }
   .hero__about { grid-template-columns: 1fr; gap: 2.5rem; }
-  .hero__media::before { inset: 0.75rem -0.75rem -0.75rem 0.75rem; }
   .hero__beginnings { margin-top: 3rem; }
+  .hero__beginnings--photo { grid-template-columns: 1fr; grid-template-areas: 'head' 'text' 'media'; }
+  .hero__beginnings-media { min-height: 0; aspect-ratio: 4 / 3; margin-top: 2rem; }
 }

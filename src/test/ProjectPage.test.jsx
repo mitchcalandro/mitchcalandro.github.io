@@ -37,17 +37,13 @@ describe('ProjectPage', () => {
       return render(<MemoryRouter><ProjectPage /></MemoryRouter>)
     }
     const { container, unmount } = show({ projectBody })
-    expect(container.querySelector('.with-photo')).toBeNull()
+    expect(container.querySelector('.project__photo')).toBeNull()
     expect(screen.getByText('Our efforts')).toBeInTheDocument()
     unmount()
 
-    show({ projectBody, projectPhoto: {
-      asset: { _ref: 'image-p' }, alt: 'Assembly day',
-      crop: { top: 0, bottom: 0, left: 0.5, right: 0 }, hotspot: { x: 0.75, y: 0.4 },
-    } })
-    expect(screen.getByText('Our efforts').closest('.with-photo')).toContainElement(screen.getByAltText('Assembly day'))
-    // The hotspot is three quarters across the original, which is the middle of the cropped half
-    expect(screen.getByAltText('Assembly day').style.objectPosition).toBe('50% 40%')
+    show({ projectBody, projectPhoto: { asset: { _ref: 'image-p' }, alt: 'Assembly day' } })
+    expect(screen.getByAltText('Assembly day').parentElement).toHaveClass('project__photo', 'photo-frame')
+    expect(screen.getByText('Our efforts')).toBeInTheDocument()
   })
 
   it('lays a Columns block out side by side, one column per entry', () => {

@@ -113,7 +113,7 @@ export default {
       type: 'image',
       options: { hotspot: true },
       fields: [{ name: 'alt', title: 'Alt text', type: 'string', description: 'Describe the photo for screen readers' }],
-      description: 'Shown to the right of the project description, stretched to the height of the text (4:3 under it on phones). The edges get trimmed to fit, so set the hotspot on the important part. Leave empty to show the text alone.',
+      description: 'Shown to the right of the project description with the text wrapping around it (above the text on phones). The whole photo shows; use the crop tool to trim it. Leave empty to show the text alone.',
     },
     {
       name: 'projectBody',
